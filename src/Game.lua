@@ -55,6 +55,14 @@ local function AddCommand(Command, Hack)
 				Game[Command.Name](...)
 			end
 			
+			Game["Not"] = Game["Not"] or function()
+				Output("!")
+			end
+			
+			Game["EndIf"] = Game["EndIf"] or function()
+				Output("}")
+			end
+			
 			HackCommandCounts[Hack] = (HackCommandCounts[Hack] or 0) + 1
 		end
 	end
@@ -343,9 +351,6 @@ local DefaultCommands = {
 	{ Name = "UseElapsedTime", MinArgs = 0, MaxArgs = 0 },
 	{ Name = "UsePedGroup", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "msPlacePlayerCarAtLocatorName", MinArgs = 1, MaxArgs = 1 },
-	-- Special Conditional Stuff
-	{ Name = "Not", MinArgs = 0, MaxArgs = 0, CustomOutput = "!" },
-	{ Name = "EndIf", MinArgs = 0, MaxArgs = 0, CustomOutput = "}" },
 }
 
 local ASFCommands = {
@@ -433,5 +438,13 @@ local DebugTestCommands = {
 LoadHackCommands(DefaultCommands)
 LoadHackCommands(ASFCommands, "AdditionalScriptFunctionality")
 LoadHackCommands(DebugTestCommands, "DebugTest")
+
+-- If no conditional commands are loaded, add default functions to error.
+Game["Not"] = Game["Not"] or function()
+	error("Game.Not() can not be used. No conditional commands are loaded.")
+end
+Game["EndIf"] = Game["EndIf"] or function()
+	error("Game.EndIf() can not be used. No conditional commands are loaded.")
+end
 
 return Game
