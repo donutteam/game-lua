@@ -111,12 +111,12 @@ The script also contains 3 `Command` tables:
 * `ASFCommands` - This contains all the commands that Additional Script Functionality contains.
 * `DebugTestCommands` - This contains all the commands that Debug Test contains.
 
-## GameUtil.lua
-`GameUtil.lua` is an optional script that adds helper utility functions to a `GameUtil` table, for example one function for every objective and condition.
+## GameUtils.lua
+`GameUtils.lua` is an optional script that adds helper utility functions to a `GameUtils` table, for example one function for every objective and condition.
 ### Usage
-* Copy `GameUtil.lua` to your mod's Resources folder, and load it in `CustomFiles.lua` *after `Game.lua`*.
-  * Example: `dofile(GetModPath() .. "/Resources/lib/GameUtil.lua)`.
-* In a MFK or CON Lua script, you can now use `GameUtil` functions in place of their `Game` functions. For a full list, see the [Functions](#Functions) section below.
+* Copy `GameUtils.lua` to your mod's Resources folder, and load it in `CustomFiles.lua` *after `Game.lua`*.
+  * Example: `dofile(GetModPath() .. "/Resources/lib/GameUtils.lua)`.
+* In a MFK or CON Lua script, you can now use `GameUtils` functions in place of their `Game` functions. For a full list, see the [Functions](#Functions) section below.
 
 ### Functions
 #### TODO
