@@ -1,4 +1,12 @@
-assert(Game, "You must load Game.lua prior to loading GameHooks.lua")
+local assert = assert
+local pcall = pcall
+local tostring = tostring
+local type = type
+
+local table_unpack = table.unpack
+
+assert(type(Game) == "table", "You must load Game.lua prior to loading GameHooks.lua")
+local Game = Game
 
 GameHooks = GameHooks or {}
 local Hooks = {}
@@ -19,13 +27,13 @@ local function ProcessHooks(Command, Hooks, Callback, Arguments)
 		
 		if not Success then
 			ShowError(Command, Result, Arguments)
-		elseif Result then
+		elseif Result == false then
 			print("GameHooks.lua", "Hook for ".. Command .. " returned false. Voiding command.")
 			return
 		end
 	end
 	
-	local Success, Result = pcall(Callback, table.unpack(Arguments))
+	local Success, Result = pcall(Callback, table_unpack(Arguments))
 	
 	if not Success then
 		ShowError(Command, Result, Arguments)
@@ -33,19 +41,35 @@ local function ProcessHooks(Command, Hooks, Callback, Arguments)
 end
 
 function GameHooks.RegisterHook(Command, Callback)
-	assert(Game[Command], "Command \"" .. Command .. "\" does not exist in the Game table.")
+	local OriginalFunction = Game[Command]
+	assert(type(OriginalFunction) == "function", "Command \"" .. Command .. "\" does not exist in the Game table.")
 	
-	if not Hooks[Command] then
-		Hooks[Command] = {}
-		
-		local OriginalFunction = Game[Command]
+	local CommandHooks = Hooks[Command]
+	if not CommandHooks then
+		CommandHooks = {}
+		Hooks[Command] = CommandHooks
 		
 		Game[Command] = function(...)
-			ProcessHooks(Command, Hooks[Command], OriginalFunction, {...})
+			ProcessHooks(Command, CommandHooks, OriginalFunction, {...})
 		end
 	end
 	
-	Hooks[Command][#Hooks[Command] + 1] = Callback
+	local HookIndex = #CommandHooks + 1
+	CommandHooks[HookIndex] = Callback
+	return HookIndex
+end
+
+local function RemovedHook()
+	return true
+end
+
+function GameHooks.RemoveHook(Command, Index)
+	assert(type(Index) == "number" and Index >= 1, "Index must be a number greater than or equal to 1.")
+	local CommandHooks = Hooks[Command]
+	assert(type(CommandHooks) == "table", "Command \"" .. Command .. "\" does not have any existing hooks.")
+	assert(Index <= #CommandHooks, "Index must be less than or equal to the number of hooks.")
+	
+	CommandHooks[Index] = RemovedHook
 end
 
 return GameHooks

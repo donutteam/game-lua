@@ -1,11 +1,24 @@
+local assert = assert
+local error = error
+local tostring = tostring
+local type = type
+
 Game = Game or {}
+assert(type(Game) == "table", "Global variable \"Game\" must be a table.")
+
+local Game = Game
 local HackCommandCounts = {}
-local tbl_concat = table.concat
+
+local string_gsub = string.gsub
+
+local table_concat = table.concat
+
+local Output = Output
 
 local function AddCommand(Command, Hack)
-	assert(Command.Name, "Command missing Name.")
-	assert(Command.MinArgs, "Command missing MinArgs.")
-	assert(Command.MaxArgs, "Command missing MaxArgs.")
+	assert(type(Command.Name) == "string", "Command.Name must be a string")
+	assert(type(Command.MinArgs) == "number", "Command.MinArgs must be a number.")
+	assert(type(Command.MaxArgs) == "number", "Command.MaxArgs must be a number.")
 	
 	if Command.CustomOutput then
 		Game[Command.Name] = function()
@@ -24,11 +37,11 @@ local function AddCommand(Command, Hack)
 			
 			if argsN > 0 then
 				for i=1,argsN do
-					args[i] = tostring(args[i])
+					args[i] = string_gsub(tostring(args[i]), "\"", "\\\"")
 				end
 				
 				Output("\"")
-				Output(tbl_concat(args, "\",\""))
+				Output(table_concat(args, "\",\""))
 				Output("\"")
 			end
 			
@@ -50,7 +63,7 @@ local function AddCommand(Command, Hack)
 end
 
 local function AddInvalidCommand(Command, Hack)
-	assert(Command.Name, "Command missing Name.")
+	assert(type(Command.Name) == "string", "Command.Name must be a string.")
 	
 	Game[Command.Name] = function()
 		error(Command.Name .. " can not be used. Required hack \"" .. Hack .. "\" is not loaded.")
@@ -72,17 +85,16 @@ local function LoadHackCommands(Commands, Hack)
 	Hack = Hack or "Default"
 	local AddFunc = Loaded and AddCommand or AddInvalidCommand
 	
-	StartTime = GetTime()
+	local StartTime = GetTime()
 	
 	for i=1,#Commands do
 		AddFunc(Commands[i], Hack)
 	end
 	
-	EndTime = GetTime()
+	local EndTime = GetTime()
 	
 	local CommandCount = HackCommandCounts[Hack]
-	local output = {Loaded and "Loaded" or "Handled", CommandCount, Hack, "command" .. (CommandCount == 1 and "" or "s"), "in", (EndTime - StartTime) * 1000 .. "ms."}
-	print("Game.lua", tbl_concat(output, " "))
+	print("Game.lua", string.format("%s %d \"%s\" command%s in %.2fms", Loaded and "Loaded" or "Handled", CommandCount, Hack, CommandCount == 1 and "" or "s", (EndTime - StartTime) * 1000))
 end
 
 -- Each command required Name, MinArgs and MaxArgs. Optional Conditional.
@@ -331,6 +343,9 @@ local DefaultCommands = {
 	{ Name = "UseElapsedTime", MinArgs = 0, MaxArgs = 0 },
 	{ Name = "UsePedGroup", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "msPlacePlayerCarAtLocatorName", MinArgs = 1, MaxArgs = 1 },
+	-- Special Conditional Stuff
+	{ Name = "Not", MinArgs = 0, MaxArgs = 0, CustomOutput = "!" },
+	{ Name = "EndIf", MinArgs = 0, MaxArgs = 0, CustomOutput = "}" },
 }
 
 local ASFCommands = {
@@ -406,9 +421,6 @@ local ASFCommands = {
 	{ Name = "SetVehicleCharacterVisible", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetWheelieOffsetX", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "UseTrafficGroup", MinArgs = 1, MaxArgs = 1 },
-	-- Special Condition Stuff
-	{ Name = "Not", MinArgs = 0, MaxArgs = 0, CustomOutput = "!" },
-	{ Name = "EndIf", MinArgs = 0, MaxArgs = 0, CustomOutput = "}" },
 }
 
 local DebugTestCommands = {

@@ -1,17 +1,20 @@
-assert(Game, "You must load Game.lua prior to loading GameUtil.lua")
+local assert = assert
 
-GameUtil = GameUtil or {}
+assert(Game, "You must load Game.lua prior to loading GameUtils.lua")
+local Game = Game
+
+GameUtils = GameUtils or {}
 
 
-GameUtil.Conditions = GameUtil.Conditions or {}
+GameUtils.Conditions = GameUtils.Conditions or {}
 
-function GameUtil.Conditions.Damage()
+function GameUtils.Conditions.Damage()
 	Game.AddCondition("damage")
 	
 	Game.CloseCondition()
 end
 
-function GameUtil.Conditions.FollowDistance(Target, Distance)
+function GameUtils.Conditions.FollowDistance(Target, Distance)
 	assert(Target, "FollowDistance condition requires a Target")
 	assert(Distance, "FollowDistance condition requires a Distance")
 	
@@ -23,7 +26,7 @@ function GameUtil.Conditions.FollowDistance(Target, Distance)
 	Game.CloseCondition()
 end
 
-function GameUtil.Conditions.KeepBarrel(Stages)
+function GameUtils.Conditions.KeepBarrel(Stages)
 	assert(Stages, "KeepBarrel condition requires number of stages to go back")
 	
 	Game.AddCondition("keepbarrel", Stages)
@@ -31,13 +34,13 @@ function GameUtil.Conditions.KeepBarrel(Stages)
 	Game.CloseCondition()
 end
 
-function GameUtil.Conditions.OutOfBounds()
+function GameUtils.Conditions.OutOfBounds()
 	Game.AddCondition("outofbounds")
 	
 	Game.CloseCondition()
 end
 
-function GameUtil.Conditions.OutOfVehicle(Time)
+function GameUtils.Conditions.OutOfVehicle(Time)
 	assert(Time, "OutOfVehicle condition requires a time allowed")
 	
 	Game.AddCondition("outofvehicle")
@@ -47,7 +50,7 @@ function GameUtil.Conditions.OutOfVehicle(Time)
 	Game.CloseCondition()
 end
 
-function GameUtil.Conditions.Position(Position)
+function GameUtils.Conditions.Position(Position)
 	assert(Position, "Position condition requires a Position")
 	
 	Game.AddCondition("position")
@@ -57,7 +60,7 @@ function GameUtil.Conditions.Position(Position)
 	Game.CloseCondition()
 end
 
-function GameUtil.Conditions.Race(Target)
+function GameUtils.Conditions.Race(Target)
 	assert(Target, "Race condition requires a Target")
 	
 	Game.AddCondition("race")
@@ -67,14 +70,14 @@ function GameUtil.Conditions.Race(Target)
 	Game.CloseCondition()
 end
 
-function GameUtil.Conditions.Timeout()
+function GameUtils.Conditions.Timeout()
 	Game.AddCondition("timeout")
 	
 	Game.CloseCondition()
 end
 
 
-GameUtil.Objectives = GameUtil.Objectives or {}
+GameUtils.Objectives = GameUtils.Objectives or {}
 local PossibleRoadArrows = { ["neither"] = true, ["both"] = true, ["nearest road"] = true, ["intersection"] = true }
 local PossibleRoadArrowsTbl = {}
 for k in pairs(PossibleRoadArrows) do
@@ -82,7 +85,7 @@ for k in pairs(PossibleRoadArrows) do
 end
 local PossibleRoadArrowsStr = table.concat(PossibleRoadArrowsTbl, "; ")
 
-function GameUtil.Objectives.BuyCar(Car)
+function GameUtils.Objectives.BuyCar(Car)
 	assert(Car, "BuyCar objective requires a Car")
 	
 	Game.AddObjective("buycar", Car)
@@ -90,7 +93,7 @@ function GameUtil.Objectives.BuyCar(Car)
 	Game.CloseObjective()
 end
 
-function GameUtil.Objectives.BuySkin(Skin)
+function GameUtils.Objectives.BuySkin(Skin)
 	assert(Skin, "BuySkin objective requires a Skin")
 	
 	Game.AddObjective("buyskin", Skin)
@@ -98,7 +101,7 @@ function GameUtil.Objectives.BuySkin(Skin)
 	Game.CloseObjective()
 end
 
-function GameUtil.Objectives.Coins(CoinCount)
+function GameUtils.Objectives.Coins(CoinCount)
 	assert(Coins, "Coins objective requires a CoinCount")
 	
 	Game.AddObjective("coins")
@@ -108,7 +111,7 @@ function GameUtil.Objectives.Coins(CoinCount)
 	Game.CloseObjective()
 end
 
-function GameUtil.Objectives.Delivery(Location, Drawable, RoadArrow, SoundResource, CollectibleEffect)
+function GameUtils.Objectives.Delivery(Location, Drawable, RoadArrow, SoundResource, CollectibleEffect)
 	assert(Location, "Delivery objective requires a Location")
 	assert(Drawable, "Delivery objective requires a Drawable")
 	RoadArrow = RoadArrow or "both"
@@ -124,7 +127,7 @@ function GameUtil.Objectives.Delivery(Location, Drawable, RoadArrow, SoundResour
 	Game.CloseObjective()
 end
 
-function GameUtil.Objectives.Destroy(Target)
+function GameUtils.Objectives.Destroy(Target)
 	assert(Target, "Destroy objective requires a Target")
 	
 	Game.AddObjective("destroy")
@@ -134,7 +137,7 @@ function GameUtil.Objectives.Destroy(Target)
 	Game.CloseObjective()
 end
 
-function GameUtil.Objectives.DestroyBoss(Target)
+function GameUtils.Objectives.DestroyBoss(Target)
 	assert(Target, "DestroyBoss objective requires a Target")
 	
 	Game.AddObjective("destroyboss")
@@ -146,7 +149,7 @@ function GameUtil.Objectives.DestroyBoss(Target)
 	Game.CloseObjective()
 end
 
-function GameUtil.Objectives.Dialogue(Player, NPC, Conversation, PlayerLocation, NPCLocation, CarLocation, PlayerRandomAnimations, NPCRandomAnimations, ConversationCams, PlayerAnimations, NPCAnimations, CamBestSide)
+function GameUtils.Objectives.Dialogue(Player, NPC, Conversation, PlayerLocation, NPCLocation, CarLocation, PlayerRandomAnimations, NPCRandomAnimations, ConversationCams, PlayerAnimations, NPCAnimations, CamBestSide)
 	assert(Player, "Dialogue objective requires a Player")
 	assert(NPC, "Dialogue objective requires an NPC")
 	assert(Conversation, "Dialogue objective requires a Conversation")
@@ -186,4 +189,4 @@ function GameUtil.Objectives.Dialogue(Player, NPC, Conversation, PlayerLocation,
 	Game.CloseObjective()
 end
 
-return GameUtil
+return GameUtils
