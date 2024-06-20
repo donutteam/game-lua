@@ -291,7 +291,21 @@ function Game.GagSetSoundLoadDistances(LoadDistance, UnloadDistance) end
 ---@param HasSparkles integer Whether the gag has sparkles.
 function Game.GagSetSparkle(HasSparkles) end
 
--- TODO: GagSetTrigger (Min: 3, Max: 5)
+---Sets the trigger type, position (using a locator) and radius of the gag.
+---
+---@param Type Game.GagTriggerType The trigger type.
+---@param LocatorName string The name of the locator to put the trigger at.
+---@param Radius number The radius of the trigger.
+function Game.GagSetTrigger(Type, LocatorName, Radius) end
+
+---Sets the trigger type, position (using coordinates) and radius of the gag.
+---
+---@param Type Game.GagTriggerType The trigger type.
+---@param X number The X coordinate.
+---@param Y number The Y coordinate.
+---@param Z number The Z coordinate.
+---@param Radius number The radius of the trigger.
+function Game.GagSetTrigger(Type, X, Y, Z, Radius) end
 
 -- TODO: GagSetWeight (Min: 1, Max: 1)
 
