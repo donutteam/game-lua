@@ -46,7 +46,10 @@ error("Meta files should not be executed.")
 
 -- TODO: AddGagBinding (Min: 5, Max: 5)
 
--- TODO: AddGlobalProp (Min: 1, Max: 1)
+---Does nothing.
+---
+---@param UnusedArgument1 any
+function Game.AddGlobalProp(UnusedArgument1) end
 
 -- TODO: AddMission (Min: 1, Max: 1)
 
