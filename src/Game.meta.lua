@@ -187,7 +187,10 @@ function Game.CreateChaseManager(VehicleName, CONFilePath, SpawnRate) end
 ---@param PedGroupIndex integer The index of the ped group to create.
 function Game.CreatePedGroup(PedGroupIndex) end
 
--- TODO: CreateTrafficGroup (Min: 1, Max: 1)
+---Initializes a new traffic group.
+---
+---@param TrafficGroupIndex integer The index of the traffic group to create.
+function Game.CreateTrafficGroup(TrafficGroupIndex) end
 
 -- TODO: DeactivateTrigger (Min: 1, Max: 1)
 
