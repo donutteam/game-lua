@@ -209,7 +209,10 @@ function Game.GagEnd() end
 ---@param FMVName string The file name of the FMV. Relative to "movies". Note that this has a max of 13 characters, including the extension.
 function Game.GagPlayFMV(FMVName) end
 
--- TODO: GagSetAnimCollision (Min: 1, Max: 1)
+---Sets if the gag has animated collision.
+---
+---@param HasAnimatedCollision integer Whether the gag has animated collision.
+function Game.GagSetAnimCollision(HasAnimatedCollision) end
 
 -- TODO: GagSetCameraShake (Min: 2, Max: 3)
 
