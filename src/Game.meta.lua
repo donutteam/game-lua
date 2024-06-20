@@ -1120,6 +1120,11 @@ function Game.UsePedGroup(PedGroupIndex) end
 
 -- TODO: LucasTest (Min: 0, Max, 6)
 
--- TODO: Sleep (Min: 1, Max, 1)
+---Sleeps for the specified amount of milliseconds.
+---
+---Requires the DebugTest hack to be used.
+---
+---@param Milliseconds integer The amount of milliseconds to sleep for.
+function Game.Sleep(Milliseconds) end
 
 -- TODO: TaskMessage (Min: 3, Max, 4)
