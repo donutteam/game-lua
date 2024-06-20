@@ -808,7 +808,8 @@ function Game.StreetRacePropsUnload(DynaLoadData) end
 
 -- TODO: SwapInDefaultCar (Min: 0, Max: 0)
 
--- TODO: TurnGotoDialogOff (Min: 0, Max: 0)
+---Prevents the character from saying a dialogue line about reaching the destination upon reaching the destination in a "gooutside" or "goto" objective.
+function Game.TurnGotoDialogOff() end
 
 -- TODO: UseElapsedTime (Min: 0, Max: 0)
 
