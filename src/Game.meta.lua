@@ -661,7 +661,10 @@ function Game.SetDialoguePositions(CharacterLocator1, CharacterLocator2, UnusedC
 
 -- TODO: SetDriver (Min: 1, Max: 1)
 
--- TODO: SetDurationTime (Min: 1, Max: 1)
+---Sets the amount of time a "timer" objective should last.
+---
+---@param TimeSeconds integer The amount of time in seconds.
+function Game.SetDurationTime(TimeSeconds) end
 
 ---Sets dyna load data to be executed when restarting the mission.
 ---
