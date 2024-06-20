@@ -614,7 +614,10 @@ function Game.SetDynaLoadData(DynaLoadData, InteriorName) end
 
 -- TODO: SetGasScaleSpeedThreshold (Min: 1, Max: 1)
 
--- TODO: SetHUDIcon (Min: 1, Max: 1)
+---Sets the HUD icon for a stage.
+---
+---@param IconName string The name of the HUD icon sprite, minus the ".png" extension. Max length of 11 characters.
+function Game.SetHUDIcon(IconName) end
 
 -- TODO: SetHasDoors (Min: 1, Max: 1)
 
