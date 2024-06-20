@@ -61,7 +61,19 @@ function Game.ActivateVehicle(VehicleName, LocatorName, AIType, DriverName) end
 ---@param ChoreographyName string The name of the choreography to use.
 function Game.AddCharacter(CharacterName, ChoreographyName) end
 
--- TODO: AddCollectible (Min: 1, Max: 4)
+---Adds a collectible to a stage.
+---
+---For "delivery" objectives, these are the items the player must collect to complete the stage.
+---
+---For "dump" objectives, these are the items the player must obtain from the target vehicle.
+---
+---For "race" objectives, these are the waypoints the player must pass to complete the race.
+---
+---@param LocatorName string The name of the locator to add the collectible to. The position of the locator does not matter for "dump" objectives.
+---@param DrawableName string | nil The name of the drawable to use.
+---@param NoBoxConversationName string | nil The name of the conversation to play when the collectible is picked up. Optional.
+---@param NoBoxConversationCharacterName string | nil The name of a second character in the conversation. Optional if the only character talking is the player.
+function Game.AddCollectible(LocatorName, DrawableName, NoBoxConversationName, NoBoxConversationCharacterName) end
 
 -- TODO: AddCollectibleStateProp (Min: 3, Max: 3)
 
