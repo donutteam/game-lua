@@ -1062,7 +1062,12 @@ function Game.UsePedGroup(PedGroupIndex) end
 
 -- TODO: SetParkedCarsEnabled (Min: 1, Max, 1)
 
--- TODO: SetPedsEnabled (Min: 1, Max, 1)
+---Sets whether pedestrians are enabled for the mission.
+---
+---Requires the AdditionalScriptFunctionality hack to be used.
+---
+---@param Enabled integer Whether pedestrians are enabled.
+function Game.SetPedsEnabled(Enabled) end
 
 -- TODO: SetStageAllowMissionCancel (Min: 1, Max, 1)
 
