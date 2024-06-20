@@ -541,7 +541,11 @@ function Game.SetCarAttributes(CarName, TopSpeed, Acceleration, Toughness, Handl
 
 -- TODO: SetDurationTime (Min: 1, Max: 1)
 
--- TODO: SetDynaLoadData (Min: 1, Max: 2)
+---Sets dyna load data to be executed when restarting the mission.
+---
+---@param DynaLoadData string A dyna load data string.
+---@param InteriorName string | nil The name of the interior the player starts in, if they start in one.
+function Game.SetDynaLoadData(DynaLoadData, InteriorName) end
 
 -- TODO: SetEBrakeEffect (Min: 1, Max: 1)
 
