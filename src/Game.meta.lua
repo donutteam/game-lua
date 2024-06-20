@@ -280,7 +280,11 @@ function Game.GagSetRandom(IsRandom) end
 ---@param SoundResourceName string The name of the sound resource to play.
 function Game.GagSetSound(SoundResourceName) end
 
--- TODO: GagSetSoundLoadDistances (Min: 2, Max: 2)
+---Overrides the sound load distances for the gag.
+---
+---@param LoadDistance number The load distance. Defaults to 10.
+---@param UnloadDistance number The unload distance. Defaults to 20.
+function Game.GagSetSoundLoadDistances(LoadDistance, UnloadDistance) end
 
 -- TODO: GagSetSparkle (Min: 1, Max: 1)
 
