@@ -689,7 +689,11 @@ function Game.SetDynaLoadData(DynaLoadData, InteriorName) end
 
 -- TODO: SetFadeOut (Min: 1, Max: 1)
 
--- TODO: SetFollowDistances (Min: 2, Max: 2)
+---Sets the follow distances for a "followdistance" condition.
+---
+---@param UnusedMinimumDistance number The minimum distance. Read by the game but not actually used.
+---@param MaximumDistance number The maximum distance. The player must be within this distance of the target vehicle.
+function Game.SetFollowDistances(UnusedMinimumDistance, MaximumDistance) end
 
 -- TODO: SetForcedCar (Min: 0, Max: 0)
 
