@@ -55,7 +55,24 @@ function Game.AddCharacter(CharacterName, ChoreographyName) end
 
 -- TODO: AddCollectibleStateProp (Min: 3, Max: 3)
 
--- TODO: AddCondition (Min: 1, Max: 2)
+---Adds a condition to a stage.
+---
+---@param ConditionType string The type of condition to add.
+function Game.AddCondition(ConditionType) end
+
+---Adds a "carryingspcollectible" condition to a stage.
+---
+---Radical does not use this type of condition in the base game.
+---
+---@param ConditionType "carryingspcollectible" The carryingspcollectible condition type.
+---@param CollectibleName string | nil The name of the collectible to carry. Technically optional, but the player will always fail if its not specified.
+function Game.AddCondition(ConditionType, CollectibleName) end
+
+---Adds a "keepbarrel" condition to a stage.
+---
+---@param ConditionType "keepbarrel" The keepbarrel condition type.
+---@param NumberOfStagesToGoBack integer | nil The number of stages to go back if the user drops the barrel. Optional, defaults to 1.
+function Game.AddCondition(ConditionType, NumberOfStagesToGoBack) end
 
 -- TODO: AddDriver (Min: 2, Max: 2)
 
