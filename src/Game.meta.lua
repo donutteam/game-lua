@@ -273,7 +273,8 @@ function Game.CloseCondition() end
 ---Closes the mission being initialised.
 function Game.CloseMission() end
 
--- TODO: CloseObjective (Min: 0, Max: 0)
+---Closes the objective being initialised.
+function Game.CloseObjective() end
 
 ---Ends initializing the current ped group.
 function Game.ClosePedGroup() end
