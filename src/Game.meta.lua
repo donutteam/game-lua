@@ -51,7 +51,10 @@ function Game.ActivateVehicle(VehicleName, LocatorName, AIType, DriverName) end
 
 -- TODO: AddBehaviour (Min: 2, Max: 7)
 
--- TODO: AddBonusMission (Min: 1, Max: 1)
+---Adds a bonus mission to the level.
+---
+---@param BonusMissionIdentifier string The identifier of the bonus mission.
+function Game.AddBonusMission(BonusMissionIdentifier) end
 
 -- TODO: AddBonusMissionNPCWaypoint (Min: 2, Max: 2)
 
