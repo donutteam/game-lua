@@ -193,7 +193,13 @@ function Game.GagBegin(GagFileName) end
 ---@param RejectConversationName string The name of the conversation to play when the player interacts with the gag with an incomplete set of cards.
 function Game.GagCheckCollCards(CharacterName1, CharacterName2, AcceptConversationName, InstructConversationName, RejectConversationName) end
 
--- TODO: GagCheckMovie (Min: 4, Max: 4)
+---Sets an FMV or conversation to play when interacting with the NPC with or without a complete set of cards respectively.
+---
+---@param CharacterName1 string The name of the first character. This or CharacterName2 should be the player.
+---@param CharacterName2 string The name of the second character. This or CharacterName1 should be the player.
+---@param FMVName string The name of the FMV to play when the player interacts with the NPC with a complete set of cards.
+---@param RejectConversationName string The name of the conversation to play when the player interacts with the NPC without a complete set of cards.
+function Game.GagCheckMovie(CharacterName1, CharacterName2, FMVName, RejectConversationName) end
 
 ---Ends the gag being initialised.
 function Game.GagEnd() end
