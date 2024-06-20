@@ -307,7 +307,10 @@ function Game.GagSetTrigger(Type, LocatorName, Radius) end
 ---@param Radius number The radius of the trigger.
 function Game.GagSetTrigger(Type, X, Y, Z, Radius) end
 
--- TODO: GagSetWeight (Min: 1, Max: 1)
+---Sets the probability of selecting this gag when its set to random.
+---
+---@param Weight integer The probability of selecting this gag.
+function Game.GagSetWeight(Weight) end
 
 -- TODO: GoToPsScreenWhenDone (Min: 0, Max: 0)
 
