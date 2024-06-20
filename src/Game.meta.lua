@@ -286,7 +286,10 @@ function Game.GagSetSound(SoundResourceName) end
 ---@param UnloadDistance number The unload distance. Defaults to 20.
 function Game.GagSetSoundLoadDistances(LoadDistance, UnloadDistance) end
 
--- TODO: GagSetSparkle (Min: 1, Max: 1)
+---Sets if the gag has sparkles on it.
+---
+---@param HasSparkles integer Whether the gag has sparkles.
+function Game.GagSetSparkle(HasSparkles) end
 
 -- TODO: GagSetTrigger (Min: 3, Max: 5)
 
