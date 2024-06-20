@@ -1,3 +1,16 @@
 {	
+	"Lua.diagnostics.globals": 
+	[
+		"Alert",
+		"Exists",
+		"FixSlashes",
+		"GetModPath",
+		"GetPath",
+		"GetTime",
+		"IsHackLoaded",
+		"Output",
+		"RemoveFileExtension",
+	],
+
 	"todo-tree.regex.regex": "(--|//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
 }
