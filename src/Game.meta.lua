@@ -741,12 +741,17 @@ function Game.SetTotalWasps(LevelNumber, NumberOfWasps) end
 
 ---Sets regions to load for the mission.
 ---
----Note: Calling this command also disables parked cars and peds. You can use SetParkedCarsEnabled and SetPedsEnabled in the AdditionalScriptFunctionality hack to re-enable them.
+---Calling this command also disables parked cars and peds for the duration of the mission. 
+---
+---You can use SetParkedCarsEnabled and SetPedsEnabled in the AdditionalScriptFunctionality hack to re-enable them.
 ---
 ---@param DynaLoadData string A dyna load data string.
 function Game.StreetRacePropsLoad(DynaLoadData) end
 
--- TODO: StreetRacePropsUnload (Min: 1, Max: 1)
+---Sets regions to unload for the mission.
+---
+---@param DynaLoadData string A dyna load data string.
+function Game.StreetRacePropsUnload(DynaLoadData) end
 
 -- TODO: SuppressDriver (Min: 1, Max: 1)
 
