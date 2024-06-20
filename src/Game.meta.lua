@@ -177,7 +177,10 @@ function Game.ClearVehicleSelectInfo() end
 ---@param SpawnRate number The spawn rate of the vehicles. This does effectively nothing when there is only one model for the chase manager to use, the maximum amount supported by the game.
 function Game.CreateChaseManager(VehicleName, CONFilePath, SpawnRate) end
 
--- TODO: CreatePedGroup (Min: 1, Max: 1)
+---Starts initializing a new ped group.
+---
+---@param PedGroupIndex integer The index of the ped group to create.
+function Game.CreatePedGroup(PedGroupIndex) end
 
 -- TODO: CreateTrafficGroup (Min: 1, Max: 1)
 
