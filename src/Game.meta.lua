@@ -834,7 +834,10 @@ function Game.SetVehicleAIParams(VehicleName, MinimumShortcutSkill, MaximumShort
 ---Makes the stage show the "TASK COMPLETE!" message when completed.
 function Game.ShowStageComplete() end
 
--- TODO: StageStartMusicEvent (Min: 1, Max: 1)
+---Starts a music event at the start of the stage.
+---
+---@param EventName string The name of the music event to start.
+function Game.StageStartMusicEvent(EventName) end
 
 -- TODO: StartCountdown (Min: 1, Max: 2)
 
