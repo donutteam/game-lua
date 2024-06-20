@@ -188,7 +188,8 @@ function Game.GagBegin(GagFileName) end
 
 -- TODO: GagCheckMovie (Min: 4, Max: 4)
 
--- TODO: GagEnd (Min: 0, Max: 0)
+---Ends the gag being initialised.
+function Game.GagEnd() end
 
 -- TODO: GagPlayFMV (Min: 1, Max: 1)
 
