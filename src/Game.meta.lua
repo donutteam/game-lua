@@ -701,7 +701,11 @@ function Game.SetMissionResetPlayerOutCar(PlayerLocatorName, CarLocatorName) end
 
 -- TODO: SetMissionStartMulticontName (Min: 1, Max: 1)
 
--- TODO: SetMusicState (Min: 2, Max: 2)
+---Sets the music state for a stage.
+---
+---@param StateName string The name of the music state.
+---@param StateValue string The value of the music state.
+function Game.SetMusicState(StateName, StateValue) end
 
 -- TODO: SetNormalSteering (Min: 1, Max: 1)
 
