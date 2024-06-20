@@ -1110,7 +1110,14 @@ function Game.UsePedGroup(PedGroupIndex) end
 
 -- TODO: SetWheelieOffsetX (Min: 1, Max, 1)
 
--- TODO: UseTrafficGroup (Min: 1, Max, 1)
+---Sets the traffic group used when restarting the mission.
+---
+---Requires the AdditionalScriptFunctionality hack to be used.
+---
+---Furthermore, you must use CustomTrafficSupport to actually have more than one traffic group.
+---
+---@param TrafficGroupIndex integer The traffic group index.
+function Game.UseTrafficGroup(TrafficGroupIndex) end
 
 --
 -- Debug Test
