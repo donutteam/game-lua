@@ -6,6 +6,8 @@ error("Meta files should not be executed.")
 -- Types
 --
 
+---@alias GameTypes.AIType "NULL" | "chase" | "evade" | "race" | "target"
+
 ---@alias GameTypes.GagCycleType "cycle" | "default" | "reset" | "single"
 
 ---@alias GameTypes.GagTriggerType "action" | "touch"
@@ -29,7 +31,13 @@ Game = {}
 
 -- TODO: ActivateTrigger (Min: 1, Max: 1)
 
--- TODO: ActivateVehicle (Min: 3, Max: 4)
+---Activates a vehicle added with AddStageVehicle in a previous stage.
+---
+---@param VehicleName string The name of the vehicle to activate.
+---@param LocatorName string The name of the locator to add the vehicle to. Use "NULL" to keep the vehicle in its current location.
+---@param AIType GameTypes.AIType The AI type of the vehicle.
+---@param DriverName string | nil The name of the driver for the vehicle. Optional.
+function Game.ActivateVehicle(VehicleName, LocatorName, AIType, DriverName) end
 
 -- TODO: AddAmbientCharacter (Min: 2, Max: 3)
 
