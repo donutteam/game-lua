@@ -118,7 +118,10 @@ function Game.AddGagBinding(InteriorName, GagFileName, CycleType, Weight, SoundR
 ---@param UnusedArgument1 any
 function Game.AddGlobalProp(UnusedArgument1) end
 
--- TODO: AddMission (Min: 1, Max: 1)
+---Adds a mission to the level.
+---
+---@param MissionIdentifier string The mission identifier such as m0 or m1.
+function Game.AddMission(MissionIdentifier) end
 
 -- TODO: AddNPC (Min: 2, Max: 3)
 
