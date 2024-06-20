@@ -1060,7 +1060,12 @@ function Game.UsePedGroup(PedGroupIndex) end
 
 -- TODO: SetObjUseCameraPosition (Min: 1, Max, 1)
 
--- TODO: SetParkedCarsEnabled (Min: 1, Max, 1)
+---Sets whether parked cars are enabled for the mission.
+---
+---Requires the AdditionalScriptFunctionality hack to be used.
+---
+---@param Enabled integer Whether parked cars are enabled.
+function Game.SetParkedCarsEnabled(Enabled) end
 
 ---Sets whether pedestrians are enabled for the mission.
 ---
