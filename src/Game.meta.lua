@@ -120,6 +120,13 @@ function Game.AddGlobalProp(UnusedArgument1) end
 
 -- TODO: AddNPC (Min: 2, Max: 3)
 
+---Adds an NPC to an objective.
+---
+---@param NPCName string The name of the NPC to add.
+---@param LocatorName string The name of the locator to add the NPC to.
+---@param UnusedArgument3 any Unused by the game.
+function Game.AddNPC(NPCName, LocatorName, UnusedArgument3) end
+
 -- TODO: AddNPCCharacterBonusMission (Min: 7, Max: 8)
 
 ---Adds an objective to a stage.
