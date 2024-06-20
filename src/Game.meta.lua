@@ -646,7 +646,10 @@ function Game.SetMissionResetPlayerOutCar(PlayerLocatorName, CarLocatorName) end
 
 -- TODO: SetPostLevelFMV (Min: 1, Max: 1)
 
--- TODO: SetPresentationBitmap (Min: 1, Max: 1)
+---Sets the current presentation bitmap.
+---
+---@param P3DFilePath string The path to a P3D file containing the presentation bitmap Sprite.
+function Game.SetPresentationBitmap(P3DFilePath) end
 
 -- TODO: SetProjectileStats (Min: 3, Max: 3)
 
