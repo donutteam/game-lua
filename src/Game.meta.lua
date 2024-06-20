@@ -585,7 +585,10 @@ function Game.SetDynaLoadData(DynaLoadData, InteriorName) end
 
 -- TODO: SetHitPoints (Min: 1, Max: 1)
 
--- TODO: SetInitialWalk (Min: 1, Max: 1)
+---Sets a locator that the character will walk to from their starting position at the beginning of the mission.
+---
+---@param LocatorName string A locator name. Max length of 64 characters.
+function Game.SetInitialWalk(LocatorName) end
 
 -- TODO: SetIrisTransition (Min: 1, Max: 1)
 
