@@ -149,7 +149,12 @@ function Game.ClearVehicleSelectInfo() end
 
 -- TODO: CreateAnimPhysObject (Min: 2, Max: 2)
 
--- TODO: CreateChaseManager (Min: 3, Max: 3)
+---Creates a chase manager for the level.
+---
+---@param VehicleName string The name of the vehicle to initialise.
+---@param CONFilePath string The path to the CON file for the vehicle. Relative to "scripts/cars".
+---@param SpawnRate number The spawn rate of the vehicles. This does effectively nothing when there is only one model for the chase manager to use, the maximum amount supported by the game.
+function Game.CreateChaseManager(VehicleName, CONFilePath, SpawnRate) end
 
 -- TODO: CreatePedGroup (Min: 1, Max: 1)
 
