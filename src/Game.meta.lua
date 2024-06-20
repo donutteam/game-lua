@@ -777,7 +777,10 @@ function Game.SetStageMessageIndex(MessageIndex, UnusedArgument2) end
 ---Makes the stage's music stay on even when the player is not in a vehicle.
 function Game.SetStageMusicAlwaysOn() end
 
--- TODO: SetStageTime (Min: 1, Max: 1)
+---Sets the amount of time the player has to complete the stage.
+---
+---@param TimeSeconds integer The amount of time in seconds.
+function Game.SetStageTime(TimeSeconds) end
 
 -- TODO: SetStatepropShadow (Min: 2, Max: 2)
 
