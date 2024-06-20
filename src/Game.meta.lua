@@ -607,7 +607,10 @@ function Game.SetInitialWalk(LocatorName) end
 
 -- TODO: SetMissionNameIndex (Min: 1, Max: 1)
 
--- TODO: SetMissionResetPlayerInCar (Min: 1, Max: 1)
+---Makes the player get reset inside their car at the specified locator name when restarting the mission.
+---
+---@param CarLocatorName string A locator name.
+function Game.SetMissionResetPlayerInCar(CarLocatorName) end
 
 -- TODO: SetMissionResetPlayerOutCar (Min: 2, Max: 2)
 
