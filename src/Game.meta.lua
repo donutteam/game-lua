@@ -241,7 +241,11 @@ function Game.InitLevelPlayerVehicle(VehicleName, LocatorName, VehicleSlot, CONF
 
 -- TODO: PlacePlayerAtLocatorName (Min: 1, Max: 1)
 
--- TODO: PlacePlayerCar (Min: 2, Max: 2)
+---Places the player's car at a locator.
+---
+---@param CarName "current" The name of the car to place. This only actually supports "current" to place the player's current car.
+---@param LocatorName string The name of the locator to place the car at.
+function Game.PlacePlayerCar(CarName, LocatorName) end
 
 -- TODO: PreallocateActors (Min: 2, Max: 2)
 
