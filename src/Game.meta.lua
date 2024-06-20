@@ -649,7 +649,13 @@ function Game.SetDestination(InteriorOrLocatorName, DrawableName, FirstTriggerSc
 
 -- TODO: SetDialogueInfo (Min: 4, Max: 4)
 
--- TODO: SetDialoguePositions (Min: 2, Max: 4)
+---Sets the character positions for a "dialogue" objective.
+---
+---@param CharacterLocator1 string A locator name.
+---@param CharacterLocator2 string A locator name.
+---@param UnusedCarLocator string | nil A locator name. Unused by the game.
+---@param DoNotResetCharacters integer | nil If this is 1, the game will not attempt to put the characters back to where they were when the dialogue started.
+function Game.SetDialoguePositions(CharacterLocator1, CharacterLocator2, UnusedCarLocator, DoNotResetCharacters) end
 
 -- TODO: SetDonutTorque (Min: 1, Max: 1)
 
