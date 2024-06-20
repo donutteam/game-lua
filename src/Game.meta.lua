@@ -13,6 +13,12 @@ error("Meta files should not be executed.")
 -- MAYBE: This should maybe include "AI" because the game checks for it but that's weird as fuck
 ---@alias GameTypes.PlayerVehicleSlotType "DEFAULT" | "OTHER"
 
+---@alias GameTypes.RewardQuestType "bonusmission" | "cards" | "defaultcar" | "defaultskin" | "forsale" | "goldcards" | "streetrace"
+
+---@alias GameTypes.RewardSellerType "gil" | "interior" | "simpson"
+
+---@alias GameTypes.RewardType "car" | "skin"
+
 --
 -- Globals
 --
@@ -153,7 +159,25 @@ function Game.AddVehicleSelectInfo(UnusedArgument1, UnusedArgument2, UnusedArgum
 
 -- TODO: BindCollectibleTo (Min: 2, Max: 2)
 
--- TODO: BindReward (Min: 5, Max: 7)
+---Binds a reward to a quest type.
+---
+---@param Name string The name of the reward.
+---@param FilePath string The file path of the reward.
+---@param Type GameTypes.RewardType The type of the reward.
+---@param QuestType GameTypes.RewardQuestType The quest type to bind the reward to.
+---@param Level integer The level to bind the reward to.
+function Game.BindReward(Name, FilePath, Type, QuestType, Level) end
+
+---Binds a reward to the "forsale" quest type.
+---
+---@param Name string The name of the reward.
+---@param FilePath string The file path of the reward.
+---@param Type GameTypes.RewardType The type of the reward.
+---@param QuestType "forsale" The "forsale" quest type.
+---@param Level integer The level to bind the reward to.
+---@param CoinCost integer The cost of the reward in coins.
+---@param Seller GameTypes.RewardSellerType The car shop to obtain the reward from.
+function Game.BindReward(Name, FilePath, Type, QuestType, Level, CoinCost, Seller) end
 
 -- TODO: CharacterIsChild (Min: 1, Max: 1)
 
