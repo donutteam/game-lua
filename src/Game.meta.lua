@@ -51,7 +51,14 @@ function Game.AddCharacter(CharacterName, ChoreographyName) end
 
 -- TODO: AddFlyingActorByLocator (Min: 3, Max: 4)
 
--- TODO: AddGagBinding (Min: 5, Max: 5)
+---Binds a gag to an interior.
+---
+---@param InteriorName string The name of the interior to bind the gag to.
+---@param GagFileName string The name of the gag file to load. Relative to "art/nis/gags".
+---@param CycleType "cycle" | "default" | "single" The cycle type of the gag.
+---@param Weight integer The probability of selecting this gag.
+---@param SoundResourceName string The name of the sound resource to play.
+function Game.AddGagBinding(InteriorName, GagFileName, CycleType, Weight, SoundResourceName) end
 
 ---Does nothing.
 ---
