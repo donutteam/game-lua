@@ -75,7 +75,11 @@ function Game.AddGlobalProp(UnusedArgument1) end
 
 -- TODO: AddObjectiveNPCWaypoint (Min: 2, Max: 2)
 
--- TODO: AddPed (Min: 2, Max: 2)
+---Adds a ped to the current ped group.
+---
+---@param CharacterName string The name of the character to add.
+---@param MaxAmount integer The maximum amount of this character that can appear at once.
+function Game.AddPed(CharacterName, MaxAmount) end
 
 -- TODO: AddPurchaseCarNPCWaypoint (Min: 2, Max: 2)
 
