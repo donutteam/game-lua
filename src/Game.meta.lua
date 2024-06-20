@@ -575,7 +575,11 @@ function Game.SetCarAttributes(CarName, TopSpeed, Acceleration, Toughness, Handl
 
 -- TODO: SetCollisionAttributes (Min: 4, Max: 4)
 
--- TODO: SetCompletionDialog (Min: 1, Max: 2)
+---Sets dialog to play upon completing the stage.
+---
+---@param NoBoxConversationName string The name of the conversation to play.
+---@param NoBoxConversationCharacterName string | nil The name of a second character in the conversation. Optional if the only character talking is the player.
+function Game.SetCompletionDialog(NoBoxConversationName, NoBoxConversationCharacterName) end
 
 -- TODO: SetCondMinHealth (Min: 1, Max: 1)
 
