@@ -6,6 +6,9 @@ error("Meta files should not be executed.")
 -- Types
 --
 
+-- MAYBE: This should maybe include "AI" because the game checks for it but that's weird as fuck
+---@alias Game.PlayerVehicleSlotType "DEFAULT" | "OTHER"
+
 --
 -- Globals
 --
@@ -212,7 +215,13 @@ function Game.CreateChaseManager(VehicleName, CONFilePath, SpawnRate) end
 
 -- TODO: GoToPsScreenWhenDone (Min: 0, Max: 0)
 
--- TODO: InitLevelPlayerVehicle (Min: 3, Max: 4)
+---Initialises a vehicle for the level or a forced car mission.
+---
+---@param VehicleName string The name of the vehicle to initialise.
+---@param LocatorName string The name of the locator to put the vehicle at.
+---@param VehicleSlot Game.PlayerVehicleSlotType The vehicle slot to put the vehicle in.
+---@param CONFilePath string | nil The path to the CON file for the vehicle. Optional. Relative to "scripts/cars".
+function Game.InitLevelPlayerVehicle(VehicleName, LocatorName, VehicleSlot, CONFilePath) end
 
 -- TODO: KillAllChaseAI (Min: 1, Max: 1)
 
