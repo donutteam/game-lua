@@ -134,7 +134,8 @@ function Game.AddVehicleSelectInfo(UnusedArgument1, UnusedArgument2, UnusedArgum
 
 -- TODO: ClearAmbientAnimations (Min: 1, Max: 1)
 
--- TODO: ClearGagBindings (Min: 0, Max: 0)
+---Clears gag bindings.
+function Game.ClearGagBindings() end
 
 -- TODO: ClearTrafficForStage (Min: 0, Max: 0)
 
