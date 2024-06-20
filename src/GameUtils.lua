@@ -8,12 +8,17 @@ GameUtils = GameUtils or {}
 
 GameUtils.Conditions = GameUtils.Conditions or {}
 
+---Adds a "damage" condition to the current stage.
 function GameUtils.Conditions.Damage()
 	Game.AddCondition("damage")
 	
 	Game.CloseCondition()
 end
 
+---Adds a "followdistance" condition to the current stage.
+---
+---@param Target string The name of the car to follow.
+---@param Distance number The maximum distance the player can get from the car.
 function GameUtils.Conditions.FollowDistance(Target, Distance)
 	assert(Target, "FollowDistance condition requires a Target")
 	assert(Distance, "FollowDistance condition requires a Distance")
@@ -26,6 +31,9 @@ function GameUtils.Conditions.FollowDistance(Target, Distance)
 	Game.CloseCondition()
 end
 
+---Adds a "keepbarrel" condition to the current stage.
+---
+---@param Stages number The number of stages to go back.
 function GameUtils.Conditions.KeepBarrel(Stages)
 	assert(Stages, "KeepBarrel condition requires number of stages to go back")
 	
@@ -34,12 +42,16 @@ function GameUtils.Conditions.KeepBarrel(Stages)
 	Game.CloseCondition()
 end
 
+---Adds an "outofbounds" condition to the current stage.
 function GameUtils.Conditions.OutOfBounds()
 	Game.AddCondition("outofbounds")
 	
 	Game.CloseCondition()
 end
 
+---Adds an "outofvehicle" condition to the current stage.
+---
+---@param Time number The amount of time in milliseconds that the player can be out of their vehicle.
 function GameUtils.Conditions.OutOfVehicle(Time)
 	assert(Time, "OutOfVehicle condition requires a time allowed")
 	
@@ -50,6 +62,7 @@ function GameUtils.Conditions.OutOfVehicle(Time)
 	Game.CloseCondition()
 end
 
+--TODO: Slightly scared of SetConditionPosition's behaviour
 function GameUtils.Conditions.Position(Position)
 	assert(Position, "Position condition requires a Position")
 	
@@ -60,6 +73,9 @@ function GameUtils.Conditions.Position(Position)
 	Game.CloseCondition()
 end
 
+---Adds a "race" condition to the current stage.
+---
+---@param Target string The name of the target vehicle.
 function GameUtils.Conditions.Race(Target)
 	assert(Target, "Race condition requires a Target")
 	
@@ -70,6 +86,7 @@ function GameUtils.Conditions.Race(Target)
 	Game.CloseCondition()
 end
 
+---Adds a "timeout" condition to the current stage.
 function GameUtils.Conditions.Timeout()
 	Game.AddCondition("timeout")
 	
