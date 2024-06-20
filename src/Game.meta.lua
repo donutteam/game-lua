@@ -93,7 +93,14 @@ function Game.AddGlobalProp(UnusedArgument1) end
 
 -- TODO: AddTrafficModel (Min: 2, Max: 3)
 
--- TODO: AddVehicleSelectInfo (Min: 3, Max: 3)
+---Does nothing.
+---
+---This is used by Radical in the base game, but it does nothing.
+---
+---@param UnusedArgument1 any
+---@param UnusedArgument2 any
+---@param UnusedArgument3 any
+function Game.AddVehicleSelectInfo(UnusedArgument1, UnusedArgument2, UnusedArgument3) end
 
 -- TODO: AllowMissionAbort (Min: 1, Max: 1)
 
