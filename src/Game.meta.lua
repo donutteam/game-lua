@@ -258,7 +258,17 @@ function Game.GagSetOutro(NumberOfOutroFrames) end
 ---@param IsPersisted integer Whether the gag is saved.
 function Game.GagSetPersist(IsPersisted) end
 
--- TODO: GagSetPosition (Min: 1, Max: 3)
+---Sets the position of the gag using a locator.
+---
+---@param LocatorName string The name of the locator to put the gag at.
+function Game.GagSetPosition(LocatorName) end
+
+---Sets the position of the gag using coordinates.
+---
+---@param X number The X coordinate.
+---@param Y number The Y coordinate.
+---@param Z number The Z coordinate.
+function Game.GagSetPosition(X, Y, Z) end
 
 -- TODO: GagSetRandom (Min: 1, Max: 1)
 
