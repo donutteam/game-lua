@@ -171,7 +171,8 @@ function Game.ClearVehicleSelectInfo() end
 
 -- TODO: CloseCondition (Min: 0, Max: 0)
 
--- TODO: CloseMission (Min: 0, Max: 0)
+---Closes the mission being initialised.
+function Game.CloseMission() end
 
 -- TODO: CloseObjective (Min: 0, Max: 0)
 
