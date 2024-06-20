@@ -624,7 +624,12 @@ function Game.SetCondTargetVehicle(VehicleName) end
 ---@param TimeMilliseconds integer The amount of time in milliseconds.
 function Game.SetCondTime(TimeMilliseconds) end
 
--- TODO: SetConditionPosition (Min: 1, Max: 1)
+---Sets a required position to not fail a "race" condition.
+---
+---Due to a bug in the game, this always requires you to get first place.
+---
+---@param Position integer The position you must get.
+function Game.SetConditionPosition(Position) end
 
 -- TODO: SetConversationCam (Min: 2, Max: 3)
 
