@@ -203,7 +203,10 @@ function Game.AddStage(Locked1, LockedType1, RequiredCarOrSkinName1, Locked2, Lo
 
 -- TODO: AddStageMusicChange (Min: 0, Max: 0)
 
--- TODO: AddStageTime (Min: 1, Max: 1)
+---Adds time to an existing stage timer upon reaching the stage.
+---
+---@param TimeSeconds integer The amount of time to add to the stage timer in seconds.
+function Game.AddStageTime(TimeSeconds) end
 
 -- TODO: AddStageVehicle (Min: 3, Max: 5)
 
