@@ -768,7 +768,20 @@ function Game.SetMusicState(StateName, StateValue) end
 
 -- TODO: SetObjTargetBoss (Min: 1, Max: 1)
 
--- TODO: SetObjTargetVehicle (Min: 1, Max: 1)
+---Sets the target vehicle for an objective.
+---
+---For "destroy" objectives, this sets the vehicle to destroy.
+---
+---For "dump" objectives, this sets the vehicle to hit.
+---
+---For "follow" objectives, this sets the vehicle to follow.
+---
+---For "getin" objectives, this does nothing even though Radical attempts to use it this way.
+---
+---For "losetail" objectives, this sets the vehicle to lose.
+---
+---@param VehicleName string The name of the vehicle to target.
+function Game.SetObjTargetVehicle(VehicleName) end
 
 -- TODO: SetParTime (Min: 1, Max: 1)
 
