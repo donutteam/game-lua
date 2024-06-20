@@ -40,6 +40,11 @@ local function ProcessHooks(Command, Hooks, Callback, Arguments)
 	end
 end
 
+---Registers a hook for the specified command.
+---
+---@param Command string The name of the command to hook.
+---@param Callback fun(Arguments : any[]) : boolean The callback for the hook. This can return false to void the command.
+---@return integer Index The index of the hook.
 function GameHooks.RegisterHook(Command, Callback)
 	local OriginalFunction = Game[Command]
 	assert(type(OriginalFunction) == "function", "Command \"" .. Command .. "\" does not exist in the Game table.")
@@ -63,6 +68,10 @@ local function RemovedHook()
 	return true
 end
 
+---Removes a hook for the specified command by index.
+---
+---@param Command string The name of the command to remove the hook from.
+---@param Index integer The index of the hook to remove.
 function GameHooks.RemoveHook(Command, Index)
 	assert(type(Index) == "number" and Index >= 1, "Index must be a number greater than or equal to 1.")
 	local CommandHooks = Hooks[Command]
