@@ -606,7 +606,16 @@ function Game.SetCompletionDialog(NoBoxConversationName, NoBoxConversationCharac
 
 -- TODO: SetCondMinHealth (Min: 1, Max: 1)
 
--- TODO: SetCondTargetVehicle (Min: 1, Max: 1)
+---Sets the target vehicle for a condition.
+---
+---For a "damage" condition, this sets the vehicle you want to avoid damaging. Use "current" to target the player's current vehicle.
+---
+---For a "followdistance" condition, this sets the vehicle you have to be close to.
+---
+---For a "race" condition, this sets the vehicle you are racing against.
+---
+---@param VehicleName string The name of the vehicle to target.
+function Game.SetCondTargetVehicle(VehicleName) end
 
 -- TODO: SetCondTime (Min: 1, Max: 1)
 
