@@ -179,7 +179,10 @@ function Game.CreateChaseManager(VehicleName, CONFilePath, SpawnRate) end
 
 -- TODO: EnableTutorialMode (Min: 1, Max: 1)
 
--- TODO: GagBegin (Min: 1, Max: 1)
+---Adds a gag to the level.
+---
+---@param GagFileName string The file name of the gag. Relative to "art/nis/gags".
+function Game.GagBegin(GagFileName) end
 
 -- TODO: GagCheckCollCards (Min: 5, Max: 5)
 
