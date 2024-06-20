@@ -221,7 +221,11 @@ function Game.GagSetAnimCollision(HasAnimatedCollision) end
 ---@param DurationSeconds number | nil The duration of the camera shake.
 function Game.GagSetCameraShake(DelaySeconds, Force, DurationSeconds) end
 
--- TODO: GagSetCoins (Min: 1, Max: 2)
+---Spawns coins after interacting with the gag.
+---
+---@param Quantity integer The quantity of coins to spawn.
+---@param DelaySeconds number | nil The delay before spawning the coins. Optional, defaults to 1.0. Furthermore, 0.0 will be the same as 1.0.
+function Game.GagSetCoins(Quantity, DelaySeconds) end
 
 -- TODO: GagSetCycle (Min: 1, Max: 1)
 
