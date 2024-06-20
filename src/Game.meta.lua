@@ -97,8 +97,6 @@ function Game.AddPed(CharacterName, MaxAmount) end
 
 ---Adds a purchase car NPC to the level.
 ---
----Note: The game registers this command as taking 5-6 arguments but it actually requires 6.
----
 ---@param ShopName "gil" | "simpson" The name of the car shop this NPC uses.
 ---@param CharacterName string The name of the character to add.
 ---@param CharacterAnimationSetName string The name of the animation set to use.
@@ -115,7 +113,38 @@ function Game.AddPurchaseCarReward(ShopName, CharacterName, CharacterAnimationSe
 
 -- TODO: AddSpawnPointByLocatorScript (Min: 6, Max: 6)
 
--- TODO: AddStage (Min: 0, Max: 7)
+---Adds a stage to the mission.
+---
+---When using 0 to 2 arguments, the string "final" as either argument tells the game to do final stage things, like showing "Mission Complete!". This probably shouldn't be used in Sunday Drive Missions.
+---
+---Other values when using 0 to 2 arguments, such as numbers like how Radical often uses, are ignored.
+---
+---@param Argument1 any
+---@param Argument2 any
+function Game.AddStage(Argument1, Argument2) end
+
+---Adds a locked stage to the mission requiring one car or skin.
+---
+---Should probably only be used in Sunday Drive missions.
+---
+---@param Locked "locked" The word "locked".
+---@param LockedType "car" | "skin" The type of thing the player must have.
+---@param RequiredCarOrSkinName string The name of the car or skin the player must have.
+function Game.AddStage(Locked, LockedType, RequiredCarOrSkinName) end
+
+---Adds a locked stage to the mission requiring two cars and/or skins.
+---
+---Of course, the player can only have one of each at a time so you probably want to specify one car AND one skin.
+---
+---Should probably only be used in Sunday Drive missions.
+---
+---@param Locked1 "locked" The word "locked".
+---@param LockedType1 "car" | "skin" The type of thing the player must have.
+---@param RequiredCarOrSkinName1 string The name of the car or skin the player must have.
+---@param Locked2 "locked" The word "locked".
+---@param LockedType2 "car" | "skin" The type of thing the player must have.
+---@param RequiredCarOrSkinName2 string The name of the car or skin the player must have.
+function Game.AddStage(Locked1, LockedType1, RequiredCarOrSkinName1, Locked2, LockedType2, RequiredCarOrSkinName2) end
 
 -- TODO: AddStageCharacter (Min: 3, Max: 5)
 
