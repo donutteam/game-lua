@@ -242,7 +242,11 @@ function Game.GagSetInterior(InteriorName) end
 ---@param NumberOfIntroFrames integer The number of frames to loop.
 function Game.GagSetIntro(NumberOfIntroFrames) end
 
--- TODO: GagSetLoadDistances (Min: 2, Max: 2)
+---Overrides the load distances for the gag.
+---
+---@param LoadDistance number The load distance. Defaults to 100.
+---@param UnloadDistance number The unload distance. Defaults to 150.
+function Game.GagSetLoadDistances(LoadDistance, UnloadDistance) end
 
 -- TODO: GagSetOutro (Min: 1, Max: 1)
 
