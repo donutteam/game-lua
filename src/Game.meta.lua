@@ -619,7 +619,10 @@ function Game.SetCompletionDialog(NoBoxConversationName, NoBoxConversationCharac
 ---@param VehicleName string The name of the vehicle to target.
 function Game.SetCondTargetVehicle(VehicleName) end
 
--- TODO: SetCondTime (Min: 1, Max: 1)
+---Sets the maximum amount of time the player can be out of a vehicle for an "outofvehicle" condition.
+---
+---@param TimeMilliseconds integer The amount of time in milliseconds.
+function Game.SetCondTime(TimeMilliseconds) end
 
 -- TODO: SetConditionPosition (Min: 1, Max: 1)
 
