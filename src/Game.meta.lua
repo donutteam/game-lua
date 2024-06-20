@@ -640,7 +640,11 @@ function Game.SetCarAttributes(CarName, TopSpeed, Acceleration, Toughness, Handl
 ---@param NumberOfGags integer The amount of gags in the level.
 function Game.SetTotalGags(LevelNumber, NumberOfGags) end
 
--- TODO: SetTotalWasps (Min: 2, Max: 2)
+---Sets the amount of wasp cameras in the specified level.
+---
+---@param LevelNumber integer The level number to set the wasp cameras for.
+---@param NumberOfWasps integer The amount of wasp cameras in the level.
+function Game.SetTotalWasps(LevelNumber, NumberOfWasps) end
 
 -- TODO: SetVehicleAIParams (Min: 3, Max: 3)
 
