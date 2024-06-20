@@ -204,7 +204,10 @@ function Game.GagCheckMovie(CharacterName1, CharacterName2, FMVName, RejectConve
 ---Ends the gag being initialised.
 function Game.GagEnd() end
 
--- TODO: GagPlayFMV (Min: 1, Max: 1)
+---Plays an FMV after interacting with the gag.
+---
+---@param FMVName string The file name of the FMV. Relative to "movies". Note that this has a max of 13 characters, including the extension.
+function Game.GagPlayFMV(FMVName) end
 
 -- TODO: GagSetAnimCollision (Min: 1, Max: 1)
 
