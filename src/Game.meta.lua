@@ -124,7 +124,10 @@ function Game.AddVehicleSelectInfo(UnusedArgument1, UnusedArgument2, UnusedArgum
 
 -- TODO: ClearTrafficForStage (Min: 0, Max: 0)
 
--- TODO: ClearVehicleSelectInfo (Min: 0, Max: 0)
+---Does nothing.
+---
+---This is used by Radical in the base game, but it does nothing.
+function Game.ClearVehicleSelectInfo() end
 
 -- TODO: CloseCondition (Min: 0, Max: 0)
 
