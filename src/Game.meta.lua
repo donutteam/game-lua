@@ -227,7 +227,10 @@ function Game.GagSetCameraShake(DelaySeconds, Force, DurationSeconds) end
 ---@param DelaySeconds number | nil The delay before spawning the coins. Optional, defaults to 1.0. Furthermore, 0.0 will be the same as 1.0.
 function Game.GagSetCoins(Quantity, DelaySeconds) end
 
--- TODO: GagSetCycle (Min: 1, Max: 1)
+---Sets the type of cycle this gag uses.
+---
+---@param CycleType Game.GagCycleType The cycle type.
+function Game.GagSetCycle(CycleType) end
 
 -- TODO: GagSetInterior (Min: 1, Max: 1)
 
