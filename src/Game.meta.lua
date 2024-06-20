@@ -387,7 +387,10 @@ function Game.PlacePlayerCar(CarName, LocatorName) end
 
 -- TODO: ResetHitAndRun (Min: 0, Max: 0)
 
--- TODO: SelectMission (Min: 1, Max: 1)
+---Sets what mission is being initialised.
+---
+---@param MissionIdentifier string The mission identifier such as m0, m0sd or sr1.
+function Game.SelectMission(MissionIdentifier) end
 
 -- TODO: SetActorRotationSpeed (Min: 2, Max: 2)
 
