@@ -665,6 +665,9 @@ function Game.SelectMission(MissionIdentifier) end
 
 -- TODO: UseElapsedTime (Min: 0, Max: 0)
 
--- TODO: UsePedGroup (Min: 1, Max: 1)
+---Sets the ped group used when restarting the mission.
+---
+---@param PedGroupIndex integer The ped group index.
+function Game.UsePedGroup(PedGroupIndex) end
 
 -- TODO: msPlacePlayerCarAtLocatorName (Min: 1, Max: 1)
