@@ -764,7 +764,15 @@ function Game.SetPresentationBitmap(P3DFilePath) end
 
 -- TODO: SetStageCamera (Min: 3, Max: 3)
 
--- TODO: SetStageMessageIndex (Min: 1, Max: 2)
+---Sets the message index for a stage.
+---
+---In regular stages, this is the message that shows up in the message box and uses MISSION_OBJECTIVE_* strings.
+---
+---In locked stages, this is the message that shows up in the full screen message box and uses INGAME_MESSAGE_* strings.
+---
+---@param MessageIndex integer The message index.
+---@param UnusedArgument2 any Unused by the game.
+function Game.SetStageMessageIndex(MessageIndex, UnusedArgument2) end
 
 -- TODO: SetStageMusicAlwaysOn (Min: 0, Max: 0)
 
