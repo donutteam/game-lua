@@ -217,7 +217,10 @@ function Game.AddStageTime(TimeSeconds) end
 ---@param DriverName string | nil The name of the driver for the vehicle. Optional.
 function Game.AddStageVehicle(VehicleName, LocatorName, AIType, CONFilePath, DriverName) end
 
--- TODO: AddStageWaypoint (Min: 1, Max: 1)
+---Adds a waypoint for AI cars to follow in a stage.
+---
+---@param LocatorName string The name of the locator to add the waypoint to.
+function Game.AddStageWaypoint(LocatorName) end
 
 -- TODO: AddTeleportDest (Min: 3, Max: 5)
 
