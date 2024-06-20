@@ -509,7 +509,8 @@ function Game.InitLevelPlayerVehicle(VehicleName, LocatorName, VehicleSlot, CONF
 
 -- TODO: MoveStageVehicle (Min: 3, Max: 3)
 
--- TODO: MustActionTrigger (Min: 0, Max: 0)
+---Requires the player to interact with the trigger in a "goto" objective to complete the stage.
+function Game.MustActionTrigger() end
 
 -- TODO: NoTrafficForStage (Min: 0, Max: 0)
 
