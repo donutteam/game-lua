@@ -232,7 +232,8 @@ function Game.CloseMission() end
 ---Ends initializing the current ped group.
 function Game.ClosePedGroup() end
 
--- TODO: CloseStage (Min: 0, Max: 0)
+---Closes the stage being initialised.
+function Game.CloseStage() end
 
 ---Ends initializing the current traffic group.
 function Game.CloseTrafficGroup() end
