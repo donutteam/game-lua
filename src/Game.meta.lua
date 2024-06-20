@@ -6,12 +6,18 @@ error("Meta files should not be executed.")
 -- Types
 --
 
+---@alias GameTypes.GagCycleType "cycle" | "default" | "reset" | "single"
+
+---@alias GameTypes.GagTriggerType "action" | "touch"
+
 -- MAYBE: This should maybe include "AI" because the game checks for it but that's weird as fuck
----@alias Game.PlayerVehicleSlotType "DEFAULT" | "OTHER"
+---@alias GameTypes.PlayerVehicleSlotType "DEFAULT" | "OTHER"
 
 --
 -- Globals
 --
+
+Game = {}
 
 -- TODO: ActivateTrigger (Min: 1, Max: 1)
 
@@ -256,7 +262,7 @@ function Game.GagSetCoins(Quantity, DelaySeconds) end
 
 ---Sets the type of cycle this gag uses.
 ---
----@param CycleType Game.GagCycleType The cycle type.
+---@param CycleType GameTypes.GagCycleType The cycle type.
 function Game.GagSetCycle(CycleType) end
 
 ---Sets the gag to be in the specified interior.
@@ -320,14 +326,14 @@ function Game.GagSetSparkle(HasSparkles) end
 
 ---Sets the trigger type, position (using a locator) and radius of the gag.
 ---
----@param Type Game.GagTriggerType The trigger type.
+---@param Type GameTypes.GagTriggerType The trigger type.
 ---@param LocatorName string The name of the locator to put the trigger at.
 ---@param Radius number The radius of the trigger.
 function Game.GagSetTrigger(Type, LocatorName, Radius) end
 
 ---Sets the trigger type, position (using coordinates) and radius of the gag.
 ---
----@param Type Game.GagTriggerType The trigger type.
+---@param Type GameTypes.GagTriggerType The trigger type.
 ---@param X number The X coordinate.
 ---@param Y number The Y coordinate.
 ---@param Z number The Z coordinate.
@@ -345,7 +351,7 @@ function Game.GagSetWeight(Weight) end
 ---
 ---@param VehicleName string The name of the vehicle to initialise.
 ---@param LocatorName string The name of the locator to put the vehicle at.
----@param VehicleSlot Game.PlayerVehicleSlotType The vehicle slot to put the vehicle in.
+---@param VehicleSlot GameTypes.PlayerVehicleSlotType The vehicle slot to put the vehicle in.
 ---@param CONFilePath string | nil The path to the CON file for the vehicle. Optional. Relative to "scripts/cars".
 function Game.InitLevelPlayerVehicle(VehicleName, LocatorName, VehicleSlot, CONFilePath) end
 
