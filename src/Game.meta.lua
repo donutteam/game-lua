@@ -164,7 +164,8 @@ function Game.ClearVehicleSelectInfo() end
 
 -- TODO: CloseObjective (Min: 0, Max: 0)
 
--- TODO: ClosePedGroup (Min: 0, Max: 0)
+---Ends initializing the current ped group.
+function Game.ClosePedGroup() end
 
 -- TODO: CloseStage (Min: 0, Max: 0)
 
