@@ -237,7 +237,10 @@ function Game.GagSetCycle(CycleType) end
 ---@param InteriorName string The name of the interior to put the gag in.
 function Game.GagSetInterior(InteriorName) end
 
--- TODO: GagSetIntro (Min: 1, Max: 1)
+---Makes the specified number of frames at the start of the gag's animation loop until it is interacted with.
+---
+---@param NumberOfIntroFrames integer The number of frames to loop.
+function Game.GagSetIntro(NumberOfIntroFrames) end
 
 -- TODO: GagSetLoadDistances (Min: 2, Max: 2)
 
