@@ -174,7 +174,8 @@ function Game.ClosePedGroup() end
 
 -- TODO: CloseStage (Min: 0, Max: 0)
 
--- TODO: CloseTrafficGroup (Min: 0, Max: 0)
+---Ends initializing the current traffic group.
+function Game.CloseTrafficGroup() end
 
 -- TODO: CreateActionEventTrigger (Min: 5, Max: 5)
 
