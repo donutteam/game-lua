@@ -253,7 +253,10 @@ function Game.GagSetLoadDistances(LoadDistance, UnloadDistance) end
 ---@param NumberOfOutroFrames integer The number of frames to loop.
 function Game.GagSetOutro(NumberOfOutroFrames) end
 
--- TODO: GagSetPersist (Min: 1, Max: 1)
+---Sets if whether you've interacted with the gag is saved to the save file.
+---
+---@param IsPersisted integer Whether the gag is saved.
+function Game.GagSetPersist(IsPersisted) end
 
 -- TODO: GagSetPosition (Min: 1, Max: 3)
 
