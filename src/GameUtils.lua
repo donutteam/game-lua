@@ -20,7 +20,7 @@ function GameUtils.Conditions.FollowDistance(Target, Distance)
 	
 	Game.AddCondition("followdistance")
 	
-	Game.SetFollowDistance(0, Distance)
+	Game.SetFollowDistances(0, Distance)
 	Game.SetCondTargetVehicle(Target)
 	
 	Game.CloseCondition()
