@@ -184,7 +184,14 @@ function Game.CreateChaseManager(VehicleName, CONFilePath, SpawnRate) end
 ---@param GagFileName string The file name of the gag. Relative to "art/nis/gags".
 function Game.GagBegin(GagFileName) end
 
--- TODO: GagCheckCollCards (Min: 5, Max: 5)
+---Sets various attributes for the special collector card gag.
+---
+---@param CharacterName1 string The name of the first character. This or CharacterName2 should be the player.
+---@param CharacterName2 string The name of the second character. This or CharacterName1 should be the player.
+---@param AcceptConversationName string The name of the conversation to play when the player interacts with the gag with a complete set of cards.
+---@param InstructConversationName string The name of the conversation to play when the player interacts with the gag for the first time.
+---@param RejectConversationName string The name of the conversation to play when the player interacts with the gag with an incomplete set of cards.
+function Game.GagCheckCollCards(CharacterName1, CharacterName2, AcceptConversationName, InstructConversationName, RejectConversationName) end
 
 -- TODO: GagCheckMovie (Min: 4, Max: 4)
 
