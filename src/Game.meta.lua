@@ -485,7 +485,8 @@ function Game.PlacePlayerCar(CarName, LocatorName) end
 
 -- TODO: PutMFPlayerInCar (Min: 0, Max: 0)
 
--- TODO: RESET_TO_HERE (Min: 0, Max: 0)
+---Sets this stage as the starting point when selecting or restarting the mission.
+function Game.RESET_TO_HERE() end
 
 -- TODO: RemoveDriver (Min: 1, Max: 1)
 
