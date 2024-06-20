@@ -79,7 +79,17 @@ function Game.AddGlobalProp(UnusedArgument1) end
 
 -- TODO: AddPurchaseCarNPCWaypoint (Min: 2, Max: 2)
 
--- TODO: AddPurchaseCarReward (Min: 5, Max: 6)
+---Adds a purchase car NPC to the level.
+---
+---Note: The game registers this command as taking 5-6 arguments but it actually requires 6.
+---
+---@param ShopName "gil" | "simpson" The name of the car shop this NPC uses.
+---@param CharacterName string The name of the character to add.
+---@param CharacterAnimationSetName string The name of the animation set to use.
+---@param CharacterLocatorName string The name of the locator to place the character at.
+---@param CharacterTriggerRadius number The radius of the trigger around the character.
+---@param CarLocatorName string The name of the locator to place the car at.
+function Game.AddPurchaseCarReward(ShopName, CharacterName, CharacterAnimationSetName, CharacterLocatorName, CharacterTriggerRadius, CarLocatorName) end
 
 -- TODO: AddSafeZone (Min: 2, Max: 2)
 
