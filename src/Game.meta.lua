@@ -626,7 +626,26 @@ function Game.SetCompletionDialog(NoBoxConversationName, NoBoxConversationCharac
 
 -- TODO: SetDemoLoopTime (Min: 1, Max: 1)
 
--- TODO: SetDestination (Min: 1, Max: 3)
+---Sets the destination for an objective.
+---
+---For "gooutside" and "goto" objectives, this specifies the locator whose trigger(s) you must enter.
+---
+---For "interior" objectives, this specifies the interior you must enter.
+---
+---@param InteriorOrLocatorName string The name of the interior or locator to go to, depending on the objective type.
+---@param FirstTriggerScale number | nil Scales the locator's first trigger, if it's a sphere trigger. Defaults to 1.
+function Game.SetDestination(InteriorOrLocatorName, FirstTriggerScale) end
+
+---Sets the destination for an objective.
+---
+---For "gooutside" and "goto" objectives, this specifies the locator whose trigger(s) you must enter.
+---
+---For "interior" objectives, this specifies the interior you must enter.
+---
+---@param InteriorOrLocatorName string The name of the interior or locator to go to, depending on the objective type.
+---@param DrawableName string | nil The name of the drawable to use. Optional.
+---@param FirstTriggerScale number | nil Scales the locator's first trigger, if it's a sphere trigger. Defaults to 1.
+function Game.SetDestination(InteriorOrLocatorName, DrawableName, FirstTriggerScale) end
 
 -- TODO: SetDialogueInfo (Min: 4, Max: 4)
 
