@@ -232,7 +232,10 @@ function Game.GagSetCoins(Quantity, DelaySeconds) end
 ---@param CycleType Game.GagCycleType The cycle type.
 function Game.GagSetCycle(CycleType) end
 
--- TODO: GagSetInterior (Min: 1, Max: 1)
+---Sets the gag to be in the specified interior.
+---
+---@param InteriorName string The name of the interior to put the gag in.
+function Game.GagSetInterior(InteriorName) end
 
 -- TODO: GagSetIntro (Min: 1, Max: 1)
 
