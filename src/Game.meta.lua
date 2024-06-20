@@ -957,9 +957,169 @@ function Game.UsePedGroup(PedGroupIndex) end
 -- TODO: msPlacePlayerCarAtLocatorName (Min: 1, Max: 1)
 
 --
+-- Special Conditional Functions
+--
+
+-- TODO: EndIf
+
+-- TODO: Not
+
+--
 -- Additional Script Functionality
 --
+
+-- TODO: AddCondTargetModel (Min: 1, Max, 1)
+
+-- TODO: AddObjTargetModel (Min: 1, Max, 1)
+
+-- TODO: AddParkedCar (Min: 1, Max, 1)
+
+-- TODO: AddStageVehicleCharacter (Min: 2, Max, 4)
+
+-- TODO: AddVehicleCharacter (Min: 1, Max, 3)
+
+-- TODO: AddVehicleCharacterSuppressionCharacter (Min: 2, Max, 2)
+
+-- TODO: CHECKPOINT_HERE (Min: 0, Max, 0)
+
+-- TODO: DisableTrigger (Min: 1, Max, 1)
+
+-- TODO: IfCurrentCheckpoint (Min: 0, Max: 0, Conditional)
+
+-- TODO: RemoveStageVehicleCharacter (Min: 2, Max, 2)
+
+-- TODO: ResetStageHitAndRun (Min: 0, Max, 0)
+
+-- TODO: ResetStageVehicleAbductable (Min: 1, Max, 1)
+
+-- TODO: SetCarChangeHitAndRunChange (Min: 1, Max, 1)
+
+-- TODO: SetCheckpointDynaLoadData (Min: 1, Max, 2)
+
+-- TODO: SetCheckpointPedGroup (Min: 1, Max, 1)
+
+-- TODO: SetCheckpointResetPlayerInCar (Min: 1, Max, 1)
+
+-- TODO: SetCheckpointResetPlayerOutCar (Min: 2, Max, 2)
+
+-- TODO: SetCheckpointTrafficGroup (Min: 1, Max, 1)
+
+-- TODO: SetCollectibleSoundEffect (Min: 1, Max, 1)
+
+-- TODO: SetCondDecay (Min: 1, Max, 2)
+
+-- TODO: SetCondDelay (Min: 1, Max, 1)
+
+-- TODO: SetCondDisplay (Min: 1, Max, 1)
+
+-- TODO: SetCondMessageIndex (Min: 1, Max, 1)
+
+-- TODO: SetCondSound (Min: 1, Max, 4)
+
+-- TODO: SetCondSpeedRangeKMH (Min: 2, Max, 2)
+
+-- TODO: SetCondThreshold (Min: 1, Max, 1)
+
+-- TODO: SetCondTotal (Min: 1, Max, 1)
+
+-- TODO: SetCondTrigger (Min: 1, Max, 1)
+
+-- TODO: SetConditionalParameter (Min: 3, Max, 5)
+
+-- TODO: SetHUDMapDrawable (Min: 1, Max, 1)
+
+-- TODO: SetHitAndRunDecayHitAndRun (Min: 1, Max, 1)
+
+-- TODO: SetHitAndRunFine (Min: 1, Max, 1)
+
+-- TODO: SetNoHitAndRunMusicForStage (Min: 0, Max, 0)
+
+-- TODO: SetObjCameraName (Min: 1, Max, 1)
+
+-- TODO: SetObjCanSkip (Min: 1, Max, 1)
+
+-- TODO: SetObjDecay (Min: 1, Max, 2)
+
+-- TODO: SetObjExplosion (Min: 2, Max, 3)
+
+-- TODO: SetObjMessageIndex (Min: 1, Max, 1)
+
+-- TODO: SetObjMulticontName (Min: 1, Max, 1)
+
+-- TODO: SetObjNoLetterbox (Min: 1, Max, 1)
+
+-- TODO: SetObjSound (Min: 1, Max, 4)
+
+-- TODO: SetObjSpeedKMH (Min: 1, Max, 1)
+
+-- TODO: SetObjThreshold (Min: 1, Max, 1)
+
+-- TODO: SetObjTotal (Min: 1, Max, 1)
+
+-- TODO: SetObjTrigger (Min: 1, Max, 1)
+
+-- TODO: SetObjUseCameraPosition (Min: 1, Max, 1)
+
+-- TODO: SetParkedCarsEnabled (Min: 1, Max, 1)
+
+-- TODO: SetPedsEnabled (Min: 1, Max, 1)
+
+-- TODO: SetStageAllowMissionCancel (Min: 1, Max, 1)
+
+-- TODO: SetStageCarChangeHitAndRunChange (Min: 1, Max, 1)
+
+-- TODO: SetStageCharacterModel (Min: 1, Max, 2)
+
+-- TODO: SetStageHitAndRun (Min: 1, Max, 1)
+
+-- TODO: SetStageHitAndRunDecay (Min: 1, Max, 1)
+
+-- TODO: SetStageHitAndRunDecayHitAndRun (Min: 1, Max, 1)
+
+-- TODO: SetStageHitAndRunDecayInterior (Min: 1, Max, 1)
+
+-- TODO: SetStageHitAndRunFine (Min: 1, Max, 1)
+
+-- TODO: SetStageNumChaseCars (Min: 1, Max, 1)
+
+-- TODO: SetStagePayout (Min: 1, Max, 1)
+
+-- TODO: SetStageVehicleAbductable (Min: 2, Max, 2)
+
+-- TODO: SetStageVehicleAllowSeatSlide (Min: 2, Max, 2)
+
+-- TODO: SetStageVehicleCharacterAnimation (Min: 3, Max, 4)
+
+-- TODO: SetStageVehicleCharacterJumpOut (Min: 2, Max, 3)
+
+-- TODO: SetStageVehicleCharacterScale (Min: 3, Max, 3)
+
+-- TODO: SetStageVehicleCharacterVisible (Min: 2, Max, 2)
+
+-- TODO: SetStageVehicleNoDestroyedJumpOut (Min: 1, Max, 1)
+
+-- TODO: SetStageVehicleReset (Min: 2, Max, 2)
+
+-- TODO: SetVehicleCharacterAnimation (Min: 2, Max, 3)
+
+-- TODO: SetVehicleCharacterJumpOut (Min: 1, Max, 2)
+
+-- TODO: SetVehicleCharacterScale (Min: 2, Max, 2)
+
+-- TODO: SetVehicleCharacterVisible (Min: 1, Max, 1)
+
+-- TODO: SetWheelieOffsetX (Min: 1, Max, 1)
+
+-- TODO: UseTrafficGroup (Min: 1, Max, 1)
 
 --
 -- Debug Test
 --
+
+-- TODO: DebugBreak (Min: 0, Max, 0)
+
+-- TODO: LucasTest (Min: 0, Max, 6)
+
+-- TODO: Sleep (Min: 1, Max, 1)
+
+-- TODO: TaskMessage (Min: 3, Max, 4)
