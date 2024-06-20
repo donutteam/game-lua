@@ -8,6 +8,8 @@ error("Meta files should not be executed.")
 
 ---@alias GameTypes.AIType "NULL" | "chase" | "evade" | "race" | "target"
 
+---@alias GameTypes.ConversationCameraType "npc_near" | "npc_far" | "pc_near" | "pc_far"
+
 ---@alias GameTypes.GagCycleType "cycle" | "default" | "reset" | "single"
 
 ---@alias GameTypes.GagTriggerType "action" | "touch"
@@ -953,3 +955,11 @@ function Game.TurnGotoDialogOff() end
 function Game.UsePedGroup(PedGroupIndex) end
 
 -- TODO: msPlacePlayerCarAtLocatorName (Min: 1, Max: 1)
+
+--
+-- Additional Script Functionality
+--
+
+--
+-- Debug Test
+--
