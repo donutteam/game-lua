@@ -102,7 +102,7 @@ function GameUtils.Objectives.BuySkin(Skin)
 end
 
 function GameUtils.Objectives.Coins(CoinCount)
-	assert(Coins, "Coins objective requires a CoinCount")
+	assert(CoinCount, "Coins objective requires a CoinCount")
 	
 	Game.AddObjective("coins")
 	
