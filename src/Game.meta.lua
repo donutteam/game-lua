@@ -119,7 +119,12 @@ function Game.AddPurchaseCarReward(ShopName, CharacterName, CharacterAnimationSe
 
 -- TODO: AddToCountdownSequence (Min: 1, Max: 2)
 
--- TODO: AddTrafficModel (Min: 2, Max: 3)
+---Adds a traffic model to the current traffic group.
+---
+---@param CarName string The name of the car to add.
+---@param Amount integer The amount of this car to add.
+---@param IsParkedCar integer | nil When set to 1, this car can appear in parking spaces.
+function Game.AddTrafficModel(CarName, Amount, IsParkedCar) end
 
 ---Does nothing.
 ---
