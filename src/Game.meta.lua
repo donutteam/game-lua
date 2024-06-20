@@ -208,7 +208,14 @@ function Game.AddStage(Locked1, LockedType1, RequiredCarOrSkinName1, Locked2, Lo
 ---@param TimeSeconds integer The amount of time to add to the stage timer in seconds.
 function Game.AddStageTime(TimeSeconds) end
 
--- TODO: AddStageVehicle (Min: 3, Max: 5)
+---Adds a vehicle to a stage.
+---
+---@param VehicleName string The name of the vehicle to add.
+---@param LocatorName string The name of the locator to add the vehicle to.
+---@param AIType GameTypes.AIType The AI type of the vehicle.
+---@param CONFilePath string | nil The path to the CON file for the vehicle. Optional. Relative to "scripts/cars".
+---@param DriverName string | nil The name of the driver for the vehicle. Optional.
+function Game.AddStageVehicle(VehicleName, LocatorName, AIType, CONFilePath, DriverName) end
 
 -- TODO: AddStageWaypoint (Min: 1, Max: 1)
 
