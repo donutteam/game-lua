@@ -267,7 +267,8 @@ function Game.ClearGagBindings() end
 ---This is used by Radical in the base game, but it does nothing.
 function Game.ClearVehicleSelectInfo() end
 
--- TODO: CloseCondition (Min: 0, Max: 0)
+---Closes the condition being initialised.
+function Game.CloseCondition() end
 
 ---Closes the mission being initialised.
 function Game.CloseMission() end
