@@ -423,7 +423,14 @@ function Game.SelectMission(MissionIdentifier) end
 
 -- TODO: SetCamBestSide (Min: 1, Max: 2)
 
--- TODO: SetCarAttributes (Min: 5, Max: 5)
+---Sets the phone booth attributes for a car.
+---
+---@param CarName string The name of the car.
+---@param TopSpeed number The top speed of the car.
+---@param Acceleration number The acceleration of the car.
+---@param Toughness number The toughness of the car.
+---@param Handling number The handling of the car.
+function Game.SetCarAttributes(CarName, TopSpeed, Acceleration, Toughness, Handling) end
 
 -- TODO: SetCarStartCamera (Min: 1, Max: 1)
 
