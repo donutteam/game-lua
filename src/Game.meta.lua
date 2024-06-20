@@ -774,7 +774,8 @@ function Game.SetPresentationBitmap(P3DFilePath) end
 ---@param UnusedArgument2 any Unused by the game.
 function Game.SetStageMessageIndex(MessageIndex, UnusedArgument2) end
 
--- TODO: SetStageMusicAlwaysOn (Min: 0, Max: 0)
+---Makes the stage's music stay on even when the player is not in a vehicle.
+function Game.SetStageMusicAlwaysOn() end
 
 -- TODO: SetStageTime (Min: 1, Max: 1)
 
