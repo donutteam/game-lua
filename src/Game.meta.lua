@@ -19,6 +19,8 @@ error("Meta files should not be executed.")
 
 ---@alias GameTypes.RewardType "car" | "skin"
 
+---@alias GameTypes.RoadArrowType "BOTH" | "both" | "b" | "NEITHER" | "neither" | "n" | "INTERSECTION" | "intersection" | "i" | "NEAREST ROAD" | "nearest road"
+
 --
 -- Globals
 --
@@ -100,7 +102,33 @@ function Game.AddGlobalProp(UnusedArgument1) end
 
 -- TODO: AddNPCCharacterBonusMission (Min: 7, Max: 8)
 
--- TODO: AddObjective (Min: 1, Max: 3)
+---Adds an objective to a stage.
+---
+---@param ObjectiveType string The type of objective to add.
+---@param RoadArrowType GameTypes.RoadArrowType | nil Indicates where road arrows should be placed when guiding the player to their destination.
+function Game.AddObjective(ObjectiveType, RoadArrowType) end
+
+---Adds a "buycar" or "buyskin" objective to a stage.
+---
+---@param ObjectiveType "buycar" | "buyskin" The buycar/buyskin objective type.
+---@param CarOrSkinName string The name of the car or skin to buy.
+---@param RoadArrowType GameTypes.RoadArrowType | nil Indicates where road arrows should be placed when guiding the player to their destination.
+function Game.AddObjective(ObjectiveType, CarOrSkinName, RoadArrowType) end
+
+---Adds a "getin" objective where you must get into a specific car.
+---
+---Note: The car must be the player's current car or the specificity will be ignored.
+---
+---@param ObjectiveType "getin" The getin objective type.
+---@param CarName string The name of the car to get into.
+function Game.AddObjective(ObjectiveType, CarName) end
+
+---Adds a gamble "race" objective to a stage.
+---
+---@param ObjectiveType "race" The race objective type.
+---@param Gamble "gamble" Specifying "gamble" as the second argument indicates this is a gamble race.
+---@param RoadArrowType GameTypes.RoadArrowType | nil Indicates where road arrows should be placed when guiding the player to their destination.
+function Game.AddObjective(ObjectiveType, Gamble, RoadArrowType) end
 
 -- TODO: AddObjectiveNPCWaypoint (Min: 2, Max: 2)
 
