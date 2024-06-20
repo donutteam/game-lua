@@ -677,7 +677,10 @@ function Game.SetInitialWalk(LocatorName) end
 
 -- TODO: SetMaxSpeedBurstTime (Min: 1, Max: 1)
 
--- TODO: SetMaxTraffic (Min: 1, Max: 1)
+---Sets the maximum amount of traffic when starting a stage.
+---
+---@param MaxTraffic integer The maximum amount of traffic cars.
+function Game.SetMaxTraffic(MaxTraffic) end
 
 -- TODO: SetMaxWheelTurnAngle (Min: 1, Max: 1)
 
