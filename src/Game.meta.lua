@@ -634,7 +634,11 @@ function Game.SetCarAttributes(CarName, TopSpeed, Acceleration, Toughness, Handl
 
 -- TODO: SetTopSpeedKmh (Min: 1, Max: 1)
 
--- TODO: SetTotalGags (Min: 2, Max: 2)
+---Sets the amount of gags in the specified level.
+---
+---@param LevelNumber integer The level number to set the gags for.
+---@param NumberOfGags integer The amount of gags in the level.
+function Game.SetTotalGags(LevelNumber, NumberOfGags) end
 
 -- TODO: SetTotalWasps (Min: 2, Max: 2)
 
