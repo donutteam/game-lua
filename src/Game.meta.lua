@@ -275,7 +275,10 @@ function Game.GagSetPosition(X, Y, Z) end
 ---@param IsRandom integer Whether the gag is randomised.
 function Game.GagSetRandom(IsRandom) end
 
--- TODO: GagSetSound (Min: 1, Max: 1)
+---Sets the sound played when interacting with the gag.
+---
+---@param SoundResourceName string The name of the sound resource to play.
+function Game.GagSetSound(SoundResourceName) end
 
 -- TODO: GagSetSoundLoadDistances (Min: 2, Max: 2)
 
