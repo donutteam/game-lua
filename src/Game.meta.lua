@@ -831,7 +831,8 @@ function Game.SetVehicleAIParams(VehicleName, MinimumShortcutSkill, MaximumShort
 
 -- TODO: ShowHUD (Min: 1, Max: 1)
 
--- TODO: ShowStageComplete (Min: 0, Max: 0)
+---Makes the stage show the "TASK COMPLETE!" message when completed.
+function Game.ShowStageComplete() end
 
 -- TODO: StageStartMusicEvent (Min: 1, Max: 1)
 
