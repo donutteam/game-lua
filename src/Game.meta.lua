@@ -591,7 +591,10 @@ function Game.SetCarAttributes(CarName, TopSpeed, Acceleration, Toughness, Handl
 
 -- TODO: SetCoinFee (Min: 1, Max: 1)
 
--- TODO: SetCollectibleEffect (Min: 1, Max: 1)
+---Sets the effect drawable when picking up collectibles in "goto" objectives and other objectives with collectibles.
+---
+---@param DrawableName string The name of the drawable to use.
+function Game.SetCollectibleEffect(DrawableName) end
 
 -- TODO: SetCollisionAttributes (Min: 4, Max: 4)
 
