@@ -858,7 +858,15 @@ function Game.SetStageTime(TimeSeconds) end
 
 -- TODO: SetSwapPlayerLocator (Min: 1, Max: 1)
 
--- TODO: SetTalkToTarget (Min: 1, Max: 4)
+---Sets the target NPC for an objective.
+---
+---For "talkto" objectives, this sets the NPC to talk to.
+---
+---@param NPCName string The name of the NPC to talk to.
+---@param IconType integer The icon drawable to use. 0 = exclamation, 1 = gift, 2 = interior_icon. Note that 1 and 2 do not exist by default in the base game.
+---@param IconYOffset number | nil The Y offset of the icon. Defaults to 0.
+---@param TriggerRadius number | nil The trigger radius. Defaults to 1.3.
+function Game.SetTalkToTarget(NPCName, IconType, IconYOffset, TriggerRadius) end
 
 -- TODO: SetTireGrip (Min: 1, Max: 1)
 
