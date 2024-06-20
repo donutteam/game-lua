@@ -270,7 +270,10 @@ function Game.GagSetPosition(LocatorName) end
 ---@param Z number The Z coordinate.
 function Game.GagSetPosition(X, Y, Z) end
 
--- TODO: GagSetRandom (Min: 1, Max: 1)
+---Sets whether the gag is randomised.
+---
+---@param IsRandom integer Whether the gag is randomised.
+function Game.GagSetRandom(IsRandom) end
 
 -- TODO: GagSetSound (Min: 1, Max: 1)
 
