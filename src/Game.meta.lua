@@ -812,7 +812,12 @@ function Game.SetTotalGags(LevelNumber, NumberOfGags) end
 ---@param NumberOfWasps integer The amount of wasp cameras in the level.
 function Game.SetTotalWasps(LevelNumber, NumberOfWasps) end
 
--- TODO: SetVehicleAIParams (Min: 3, Max: 3)
+---Sets what types of shortcuts an AI vehicle will try to take.
+---
+---@param VehicleName string The name of the vehicle to set the AI params for.
+---@param MinimumShortcutSkill integer The minimum skill level for taking shortcuts.
+---@param MaximumShortcutSkill integer The maximum skill level for taking shortcuts.
+function Game.SetVehicleAIParams(VehicleName, MinimumShortcutSkill, MaximumShortcutSkill) end
 
 -- TODO: SetVehicleToLoad (Min: 3, Max: 3)
 
