@@ -248,7 +248,10 @@ function Game.GagSetIntro(NumberOfIntroFrames) end
 ---@param UnloadDistance number The unload distance. Defaults to 150.
 function Game.GagSetLoadDistances(LoadDistance, UnloadDistance) end
 
--- TODO: GagSetOutro (Min: 1, Max: 1)
+---Makes the specified number of frames at the end of the gag's animation loop after it is interacted with.
+---
+---@param NumberOfOutroFrames integer The number of frames to loop.
+function Game.GagSetOutro(NumberOfOutroFrames) end
 
 -- TODO: GagSetPersist (Min: 1, Max: 1)
 
