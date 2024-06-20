@@ -214,7 +214,12 @@ function Game.GagPlayFMV(FMVName) end
 ---@param HasAnimatedCollision integer Whether the gag has animated collision.
 function Game.GagSetAnimCollision(HasAnimatedCollision) end
 
--- TODO: GagSetCameraShake (Min: 2, Max: 3)
+---Makes the camera shake after interacting with the gag.
+---
+---@param DelaySeconds number The delay before the camera shake.
+---@param Force number The force of the camera shake.
+---@param DurationSeconds number | nil The duration of the camera shake.
+function Game.GagSetCameraShake(DelaySeconds, Force, DurationSeconds) end
 
 -- TODO: GagSetCoins (Min: 1, Max: 2)
 
