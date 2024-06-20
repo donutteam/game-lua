@@ -30,7 +30,11 @@ error("Meta files should not be executed.")
 
 -- TODO: AddBonusObjective (Min: 1, Max: 2)
 
--- TODO: AddCharacter (Min: 2, Max: 2)
+---Adds a player character to the level.
+---
+---@param CharacterName string The name of the character to add.
+---@param ChoreographyName string The name of the choreography to use.
+function Game.AddCharacter(CharacterName, ChoreographyName) end
 
 -- TODO: AddCollectible (Min: 1, Max: 4)
 
