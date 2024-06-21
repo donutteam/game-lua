@@ -43,7 +43,7 @@ end
 ---Registers a hook for the specified command.
 ---
 ---@param Command string The name of the command to hook.
----@param Callback fun(Arguments : any[]) : boolean The callback for the hook. This can return false to void the command.
+---@param Callback fun(Arguments : any[]) : boolean | nil The callback for the hook. This can return false to void the command.
 ---@return integer Index The index of the hook.
 function GameHooks.RegisterHook(Command, Callback)
 	local OriginalFunction = Game[Command]
