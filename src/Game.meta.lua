@@ -740,7 +740,10 @@ function Game.SetHUDIcon(IconName) end
 
 -- TODO: SetHitNRun (Min: 0, Max: 0)
 
--- TODO: SetHitPoints (Min: 1, Max: 1)
+---Sets the amount of hit points the vehicle being initialised has.
+---
+---@param HitPoints number The amount of hit points.
+function Game.SetHitPoints(HitPoints) end
 
 ---Sets a locator that the character will walk to from their starting position at the beginning of the mission.
 ---
