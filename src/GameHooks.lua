@@ -18,7 +18,7 @@ local function ShowError(Command, Message, Arguments)
 		args[i] = tostring(Arguments[i])
 	end
 	
-	Alert("Hook for " .. Command .. " failed.\n\nError: " .. Message .. "\n\nArguments:\n" .. (#Arguments > 0 and ("\"" .. table.concat(args, "\", \"") .. "\"") or "NONE") .. "\n\n" .. debug.traceback(), "Game Hooks")
+	Alert("Hook for " .. Command .. " failed.\n\nError: " .. Message .. "\n\nArguments:\n" .. (#Arguments > 0 and ("\"" .. table.concat(args, "\", \"") .. "\"") or "NONE") .. "\n\n" .. debug.traceback())
 end
 
 local function ProcessHooks(Command, Hooks, Callback, Arguments)
