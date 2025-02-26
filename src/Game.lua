@@ -17,13 +17,135 @@ local table_concat = table.concat
 local GetPath = GetPath
 local Output = Output
 
+local ArgumentLengthLimit = 63
+local Limits = {
+	BonusMission = 10,
+	ChaseManager = 1,
+	Gag = 64,
+	Mission = 8,
+	SpawnPoint = 50,
+	TeleportDests = 64,
+	MissionStage = 25,
+	MissionStateProps = 10,
+	StageCharacter = 6,
+	StageConditions = 8,
+	StageCountdownSequence = 8,
+	StageObjective = 1,
+	StageVehicle = 4,
+	StageWaypoints = 32,
+	ObjectiveAddNPCs = 4,
+	ObjectiveCollectibles = 32,
+	ObjectiveNPCWaypoints = 32,
+	ObjectiveRemoveNPCs = 4,
+}
+
+if IsHackLoaded("CustomLimits") and Exists(GetModPath() .. "/CustomLimits.ini", true, false) then
+	local function ReadTextFile(path)
+		local content = ReadFile(path)
+		if not content then
+			return nil
+		end
+		
+		if content:sub(1, 3) == "\xEF\xBB\xBF" then -- UTF-8 BOM
+			return content:sub(4)
+		end
+		
+		if content:sub(1, 2) == "\xFF\xFE" then -- UTF-16LE
+			content = content:sub(3)
+			local out = {}
+			local i = 1
+			while i <= #content - 1 do
+				local lo = string.byte(content, i)
+				local hi = string.byte(content, i + 1)
+				local codepoint = hi * 256 + lo
+				i = i + 2
+				
+				if codepoint >= 0xD800 and codepoint <= 0xDBFF and i <= #content - 1 then
+					local lo2 = string.byte(content, i)
+					local hi2 = string.byte(content, i + 1)
+					local codepoint2 = hi2 * 256 + lo2
+					if codepoint2 >= 0xDC00 and codepoint2 <= 0xDFFF then
+						codepoint = 0x10000 + ((codepoint - 0xD800) * 0x400) + (codepoint2 - 0xDC00)
+						i = i + 2
+					end
+				end
+				out[#out + 1] = utf8.char(codepoint)
+			end
+			return table.concat(out)
+		end
+		
+		if content:sub(1, 2) == "\xFE\xFF" then --UTF-16BE
+			content = content:sub(3) -- Remove BOM
+			local out = {}
+			local i = 1
+			while i <= #content - 1 do
+				local hi = string.byte(content, i)
+				local lo = string.byte(content, i + 1)
+				local codepoint = hi * 256 + lo
+				i = i + 2
+				
+				if codepoint >= 0xD800 and codepoint <= 0xDBFF and i <= #content - 1 then
+					local hi2 = string.byte(content, i)
+					local lo2 = string.byte(content, i + 1)
+					local codepoint2 = hi2 * 256 + lo2
+					if codepoint2 >= 0xDC00 and codepoint2 <= 0xDFFF then
+						codepoint = 0x10000 + ((codepoint - 0xD800) * 0x400) + (codepoint2 - 0xDC00)
+						i = i + 2
+					end
+				end
+				out[#out + 1] = utf8.char(codepoint)
+			end
+			return table.concat(out)
+		end
+		
+		return content -- Assume normal UTF-8
+	end
+	
+	local CustomLimits = ReadTextFile(GetModPath() .. "/CustomLimits.ini")
+	local currentHeader
+	for line in CustomLimits:gmatch("[^\n\r]+") do
+		local header = line:match("^%s*%[(.-)%]%s*$")
+		if line:match("^%s*[;#]") then
+			-- Comment
+		elseif header then
+			currentHeader = header
+		elseif currentHeader ~= nil then
+			local key, value = line:match('^(.-)%s*=%s*"(.-)"$')
+			if not key then
+				key, value = line:match('^(.-)%s*=%s*(.-)%s*$')
+			end
+			if key then
+				if currentHeader == "Missions" then
+					if key == "StageLimit" then
+						local stageLimit = tonumber(value)
+						if stageLimit then
+							Limits.MissionStage = stageLimit
+						end
+					end
+				elseif currentHeader == "Scripting" then
+					if key == "ArgumentLengthLimit" then
+						local argumentLengthLimit = tonumber(value)
+						if argumentLengthLimit then
+							ArgumentLengthLimit = argumentLengthLimit - 1
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
 local LastPath = nil
 local OpenScopes = {}
+local Counts = {
+	Default = {}
+}
 
 local function AddCommand(Command, Hack)
 	assert(type(Command.Name) == "string", "Command.Name must be a string")
 	assert(type(Command.MinArgs) == "number", "Command.MinArgs must be a number.")
 	assert(type(Command.MaxArgs) == "number", "Command.MaxArgs must be a number.")
+	assert(Command.IncrementCount == nil or Limits[Command.IncrementCount], "Command.IncrementCount must be a valid limit.")
 	
 	if Command.CustomOutput then
 		Game[Command.Name] = function()
@@ -43,6 +165,9 @@ local function AddCommand(Command, Hack)
 					assert(stillOpenScopesN == 0, "New file detected but the following scopes are still open from \"" .. LastPath .. "\": " .. table_concat(stillOpenScopes, ", "))
 				end
 				LastPath = path
+				Counts = {
+					Default = {}
+				}
 			end
 			
 			local args = {...}
@@ -57,13 +182,21 @@ local function AddCommand(Command, Hack)
 			if Command.OpensScope then
 				assert(OpenScopes[Command.OpensScope] == nil, Command.Name .. " opens scope \"" .. Command.OpensScope .. "\" but it is already open.")
 				OpenScopes[Command.OpensScope] = Command.RequiresScope or true
+				Counts[Command.OpensScope] = {}
 			end
 			if Command.ClosesScope then
 				assert(OpenScopes[Command.ClosesScope], Command.Name .. " closes scope \"" .. Command.ClosesScope .. "\" but it is not open.")
 				OpenScopes[Command.ClosesScope] = nil
+				Counts[Command.ClosesScope] = nil
 				for scope, requiredScope in pairs(OpenScopes) do
 					assert(requiredScope ~= Command.ClosesScope, Command.Name .. " just closed scope \"" .. Command.ClosesScope .. "\" but open scope \"" .. scope .. "\" requires it.")
 				end
+			end
+			
+			if Command.IncrementCount then
+				local CountsTbl = Command.RequiresScope and Counts[Command.RequiresScope] or Counts["Default"]
+				CountsTbl[Command.IncrementCount] = (CountsTbl[Command.IncrementCount] or 0) + 1
+				assert(CountsTbl[Command.IncrementCount] <= Limits[Command.IncrementCount], Command.Name .. " increased count of \"" .. Command.IncrementCount .. "\" to " .. CountsTbl[Command.IncrementCount] .. " but there is a limit of " .. Limits[Command.IncrementCount] .. ".")
 			end
 			
 			Output(Command.Name)
@@ -72,6 +205,7 @@ local function AddCommand(Command, Hack)
 			if argsN > 0 then
 				for i=1,argsN do
 					args[i] = string_gsub(tostring(args[i]), "\"", "\\\"")
+					assert(#args[i] <= ArgumentLengthLimit, Command.Name .. " argument " .. i .. " exceeds max length of " .. ArgumentLengthLimit .. ".")
 				end
 				
 				Output("\"")
@@ -142,51 +276,51 @@ end
 -- Each command required Name, MinArgs and MaxArgs. Optional Conditional.
 local DefaultCommands = {
 	{ Name = "ActivateTrigger", MinArgs = 1, MaxArgs = 1 },
-	{ Name = "ActivateVehicle", MinArgs = 3, MaxArgs = 4, RequiresScope = "Stage" },
+	{ Name = "ActivateVehicle", MinArgs = 3, MaxArgs = 4, RequiresScope = "Stage", IncrementCount = "StageVehicle" },
 	{ Name = "AddAmbientCharacter", MinArgs = 2, MaxArgs = 3 },
 	{ Name = "AddAmbientNPCWaypoint", MinArgs = 2, MaxArgs = 2 },
 	{ Name = "AddAmbientNpcAnimation", MinArgs = 1, MaxArgs = 2 },
 	{ Name = "AddAmbientPcAnimation", MinArgs = 1, MaxArgs = 2 },
 	{ Name = "AddBehaviour", MinArgs = 2, MaxArgs = 7 },
-	{ Name = "AddBonusMission", MinArgs = 1, MaxArgs = 1 },
+	{ Name = "AddBonusMission", MinArgs = 1, MaxArgs = 1, IncrementCount = "BonusMission" },
 	{ Name = "AddBonusMissionNPCWaypoint", MinArgs = 2, MaxArgs = 2 },
 	{ Name = "AddBonusObjective", MinArgs = 1, MaxArgs = 2 },
 	{ Name = "AddCharacter", MinArgs = 2, MaxArgs = 2 },
-	{ Name = "AddCollectible", MinArgs = 1, MaxArgs = 4, RequiresScope = "Objective" },
-	{ Name = "AddCollectibleStateProp", MinArgs = 3, MaxArgs = 3, RequiresScope = "Mission" },
-	{ Name = "AddCondition", MinArgs = 1, MaxArgs = 2, OpensScope = "Condition", RequiresScope = "Stage" },
-	{ Name = "AddDriver", MinArgs = 2, MaxArgs = 2, RequiresScope = "Objective" },
+	{ Name = "AddCollectible", MinArgs = 1, MaxArgs = 4, RequiresScope = "Objective", IncrementCount = "ObjectiveCollectibles" },
+	{ Name = "AddCollectibleStateProp", MinArgs = 3, MaxArgs = 3, RequiresScope = "Mission", IncrementCount = "MissionStateProps" },
+	{ Name = "AddCondition", MinArgs = 1, MaxArgs = 2, OpensScope = "Condition", RequiresScope = "Stage", IncrementCount = "StageConditions" },
+	{ Name = "AddDriver", MinArgs = 2, MaxArgs = 2, RequiresScope = "Objective", IncrementCount = "ObjectiveAddNPCs" },
 	{ Name = "AddFlyingActor", MinArgs = 5, MaxArgs = 5 },
 	{ Name = "AddFlyingActorByLocator", MinArgs = 3, MaxArgs = 4 },
-	{ Name = "AddGagBinding", MinArgs = 5, MaxArgs = 5 },
+	{ Name = "AddGagBinding", MinArgs = 5, MaxArgs = 5, IncrementCount = "Gag" },
 	{ Name = "AddGlobalProp", MinArgs = 1, MaxArgs = 1 },
-	{ Name = "AddMission", MinArgs = 1, MaxArgs = 1 },
-	{ Name = "AddNPC", MinArgs = 2, MaxArgs = 3, RequiresScope = "Objective" },
+	{ Name = "AddMission", MinArgs = 1, MaxArgs = 1, IncrementCount = "Mission" },
+	{ Name = "AddNPC", MinArgs = 2, MaxArgs = 3, RequiresScope = "Objective", IncrementCount = "ObjectiveAddNPCs" },
 	{ Name = "AddNPCCharacterBonusMission", MinArgs = 7, MaxArgs = 8 },
-	{ Name = "AddObjective", MinArgs = 1, MaxArgs = 3, OpensScope = "Objective", RequiresScope = "Stage" },
-	{ Name = "AddObjectiveNPCWaypoint", MinArgs = 2, MaxArgs = 2, RequiresScope = "Objective" },
+	{ Name = "AddObjective", MinArgs = 1, MaxArgs = 3, OpensScope = "Objective", RequiresScope = "Stage", IncrementCount = "StageObjective" },
+	{ Name = "AddObjectiveNPCWaypoint", MinArgs = 2, MaxArgs = 2, RequiresScope = "Objective", IncrementCount = "ObjectiveNPCWaypoints" },
 	{ Name = "AddPed", MinArgs = 2, MaxArgs = 2, RequiresScope = "PedGroup" },
 	{ Name = "AddPurchaseCarNPCWaypoint", MinArgs = 2, MaxArgs = 2 },
 	{ Name = "AddPurchaseCarReward", MinArgs = 5, MaxArgs = 6 },
 	{ Name = "AddSafeZone", MinArgs = 2, MaxArgs = 2, RequiresScope = "Stage" },
 	{ Name = "AddShield", MinArgs = 2, MaxArgs = 2 },
-	{ Name = "AddSpawnPoint", MinArgs = 8, MaxArgs = 8 },
-	{ Name = "AddSpawnPointByLocatorScript", MinArgs = 6, MaxArgs = 6 },
-	{ Name = "AddStage", MinArgs = 0, MaxArgs = 7, OpensScope = "Stage", RequiresScope = "Mission" },
-	{ Name = "AddStageCharacter", MinArgs = 3, MaxArgs = 5, RequiresScope = "Stage" },
+	{ Name = "AddSpawnPoint", MinArgs = 8, MaxArgs = 8, IncrementCount = "SpawnPoint" },
+	{ Name = "AddSpawnPointByLocatorScript", MinArgs = 6, MaxArgs = 6, IncrementCount = "SpawnPoint" },
+	{ Name = "AddStage", MinArgs = 0, MaxArgs = 7, OpensScope = "Stage", RequiresScope = "Mission", IncrementCount = "MissionStage" },
+	{ Name = "AddStageCharacter", MinArgs = 3, MaxArgs = 5, RequiresScope = "Stage", IncrementCount = "StageCharacter" },
 	{ Name = "AddStageMusicChange", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
 	{ Name = "AddStageTime", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
-	{ Name = "AddStageVehicle", MinArgs = 3, MaxArgs = 5, RequiresScope = "Stage" },
-	{ Name = "AddStageWaypoint", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
-	{ Name = "AddTeleportDest", MinArgs = 3, MaxArgs = 5 },
-	{ Name = "AddToCountdownSequence", MinArgs = 1, MaxArgs = 2, RequiresScope = "Stage" },
+	{ Name = "AddStageVehicle", MinArgs = 3, MaxArgs = 5, RequiresScope = "Stage", IncrementCount = "StageVehicle" },
+	{ Name = "AddStageWaypoint", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage", IncrementCount = "StageWaypoints" },
+	{ Name = "AddTeleportDest", MinArgs = 3, MaxArgs = 5, IncrementCount = "TeleportDests" },
+	{ Name = "AddToCountdownSequence", MinArgs = 1, MaxArgs = 2, RequiresScope = "Stage", IncrementCount = "StageCountdownSequence" },
 	{ Name = "AddTrafficModel", MinArgs = 2, MaxArgs = 3, RequiresScope = "TrafficGroup" },
 	{ Name = "AddVehicleSelectInfo", MinArgs = 3, MaxArgs = 3 },
 	{ Name = "AllowMissionAbort", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
 	{ Name = "AllowRockOut", MinArgs = 0, MaxArgs = 0, RequiresScope = "Objective" },
 	{ Name = "AllowUserDump", MinArgs = 0, MaxArgs = 0, RequiresScope = "Objective" },
 	{ Name = "AmbientAnimationRandomize", MinArgs = 2, MaxArgs = 2, RequiresScope = "Stage" },
-	{ Name = "AttachStatePropCollectible", MinArgs = 2, MaxArgs = 2 },
+	{ Name = "AttachStatePropCollectible", MinArgs = 2, MaxArgs = 2, IncrementCount = "MissionStateProps" },
 	{ Name = "BindCollectibleTo", MinArgs = 2, MaxArgs = 2, RequiresScope = "Objective" },
 	{ Name = "BindReward", MinArgs = 5, MaxArgs = 7 },
 	{ Name = "CharacterIsChild", MinArgs = 1, MaxArgs = 1 },
@@ -202,14 +336,14 @@ local DefaultCommands = {
 	{ Name = "CloseTrafficGroup", MinArgs = 0, MaxArgs = 0, ClosesScope = "TrafficGroup" },
 	{ Name = "CreateActionEventTrigger", MinArgs = 5, MaxArgs = 5 },
 	{ Name = "CreateAnimPhysObject", MinArgs = 2, MaxArgs = 2 },
-	{ Name = "CreateChaseManager", MinArgs = 3, MaxArgs = 3 },
+	{ Name = "CreateChaseManager", MinArgs = 3, MaxArgs = 3, IncrementCount = "ChaseManager" },
 	{ Name = "CreatePedGroup", MinArgs = 1, MaxArgs = 1, OpensScope = "PedGroup" },
 	{ Name = "CreateTrafficGroup", MinArgs = 1, MaxArgs = 1, OpensScope = "TrafficGroup" },
 	{ Name = "DeactivateTrigger", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "DisableHitAndRun", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
 	{ Name = "EnableHitAndRun", MinArgs = 0, MaxArgs = 0 },
 	{ Name = "EnableTutorialMode", MinArgs = 1, MaxArgs = 1 },
-	{ Name = "GagBegin", MinArgs = 1, MaxArgs = 1, OpensScope = "Gag" },
+	{ Name = "GagBegin", MinArgs = 1, MaxArgs = 1, OpensScope = "Gag", IncrementCount = "Gag" },
 	{ Name = "GagCheckCollCards", MinArgs = 5, MaxArgs = 5, RequiresScope = "Gag" },
 	{ Name = "GagCheckMovie", MinArgs = 4, MaxArgs = 4, RequiresScope = "Gag" },
 	{ Name = "GagEnd", MinArgs = 0, MaxArgs = 0, ClosesScope = "Gag" },
@@ -237,7 +371,7 @@ local DefaultCommands = {
 	{ Name = "LinkActionToObjectJoint", MinArgs = 5, MaxArgs = 5 },
 	{ Name = "LoadDisposableCar", MinArgs = 3, MaxArgs = 3 },
 	{ Name = "LoadP3DFile", MinArgs = 1, MaxArgs = 3 },
-	{ Name = "MoveStageVehicle", MinArgs = 3, MaxArgs = 3, RequiresScope = "Stage" },
+	{ Name = "MoveStageVehicle", MinArgs = 3, MaxArgs = 3, RequiresScope = "Stage", IncrementCount = "StageVehicle" },
 	{ Name = "MustActionTrigger", MinArgs = 0, MaxArgs = 0, RequiresScope = "Objective" },
 	{ Name = "NoTrafficForStage", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
 	{ Name = "PlacePlayerAtLocatorName", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
@@ -245,8 +379,8 @@ local DefaultCommands = {
 	{ Name = "PreallocateActors", MinArgs = 2, MaxArgs = 2 },
 	{ Name = "PutMFPlayerInCar", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
 	{ Name = "RESET_TO_HERE", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
-	{ Name = "RemoveDriver", MinArgs = 1, MaxArgs = 1, RequiresScope = "Objective" },
-	{ Name = "RemoveNPC", MinArgs = 1, MaxArgs = 1, RequiresScope = "Objective" },
+	{ Name = "RemoveDriver", MinArgs = 1, MaxArgs = 1, RequiresScope = "Objective", IncrementCount = "ObjectiveRemoveNPCs" },
+	{ Name = "RemoveNPC", MinArgs = 1, MaxArgs = 1, RequiresScope = "Objective", IncrementCount = "ObjectiveRemoveNPCs" },
 	{ Name = "ResetCharacter", MinArgs = 2, MaxArgs = 2 },
 	{ Name = "ResetHitAndRun", MinArgs = 0, MaxArgs = 0 },
 	{ Name = "SelectMission", MinArgs = 1, MaxArgs = 1, OpensScope = "Mission" },
