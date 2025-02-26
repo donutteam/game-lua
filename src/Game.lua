@@ -205,7 +205,7 @@ local function AddCommand(Command, Hack)
 			if argsN > 0 then
 				for i=1,argsN do
 					args[i] = string_gsub(tostring(args[i]), "\"", "\\\"")
-					assert(#args[i] <= ArgumentLengthLimit, Command.Name .. " argument " .. i .. " exceeds max length of " .. ArgumentLengthLimit .. ".")
+					assert(#args[i] <= ArgumentLengthLimit, Command.Name .. " argument " .. i .. "'s length of " .. #args[i] .. " exceeds max length of " .. ArgumentLengthLimit .. ".")
 				end
 				
 				Output("\"")
