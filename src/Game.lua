@@ -241,7 +241,7 @@ local DefaultCommands = {
 	{ Name = "MustActionTrigger", MinArgs = 0, MaxArgs = 0, RequiresScope = "Objective" },
 	{ Name = "NoTrafficForStage", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
 	{ Name = "PlacePlayerAtLocatorName", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
-	{ Name = "PlacePlayerCar", MinArgs = 2, MaxArgs = 2, RequiresScope = "Stage" },
+	{ Name = "PlacePlayerCar", MinArgs = 2, MaxArgs = 2 },
 	{ Name = "PreallocateActors", MinArgs = 2, MaxArgs = 2 },
 	{ Name = "PutMFPlayerInCar", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
 	{ Name = "RESET_TO_HERE", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
