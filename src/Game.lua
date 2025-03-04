@@ -24,6 +24,7 @@ local Limits = {
 	Gag = 64,
 	Mission = 8,
 	SpawnPoint = 50,
+	SuppressDriver = 32,
 	TeleportDests = 64,
 	MissionStage = 25,
 	MissionStateProps = 10,
@@ -75,7 +76,7 @@ if IsHackLoaded("CustomLimits") and Exists(GetModPath() .. "/CustomLimits.ini", 
 		end
 		
 		if content:sub(1, 2) == "\xFE\xFF" then --UTF-16BE
-			content = content:sub(3) -- Remove BOM
+			content = content:sub(3)
 			local out = {}
 			local i = 1
 			while i <= #content - 1 do
@@ -513,7 +514,7 @@ local DefaultCommands = {
 	{ Name = "StayInBlack", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
 	{ Name = "StreetRacePropsLoad", MinArgs = 1, MaxArgs = 1, RequiresScope = "Mission" },
 	{ Name = "StreetRacePropsUnload", MinArgs = 1, MaxArgs = 1, RequiresScope = "Mission" },
-	{ Name = "SuppressDriver", MinArgs = 1, MaxArgs = 1 },
+	{ Name = "SuppressDriver", MinArgs = 1, MaxArgs = 1, IncrementCount = "SuppressDriver" },
 	{ Name = "SwapInDefaultCar", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
 	{ Name = "TurnGotoDialogOff", MinArgs = 0, MaxArgs = 0, RequiresScope = "Objective" },
 	{ Name = "UseElapsedTime", MinArgs = 0, MaxArgs = 0, RequiresScope = "Stage" },
