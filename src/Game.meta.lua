@@ -49,7 +49,48 @@ function Game.ActivateVehicle(VehicleName, LocatorName, AIType, DriverName) end
 
 -- TODO: AddAmbientPcAnimation (Min: 1, Max: 2)
 
--- TODO: AddBehaviour (Min: 2, Max: 7)
+---Adds a behaviour to the target that makes it attack the player.
+---
+---@param TargetObject string The name of a spawn point, actor or actor type.
+---@param BehaviourName "ATTACK_PLAYER" A behaviour that makes the target attack the player.
+---@param MaxFiringRange number The maximum range that the target can attempt to attack the player.
+---@param ForwardFiringArc number The arc of the attack in degrees.
+---@param TimeBeforeMoving number | nil Number of seconds between evasion attempts. Optional.
+function Game.AddBehaviour(TargetObject, BehaviourName, MaxFiringRange, ForwardFiringArc, TimeBeforeMoving) end
+
+---Adds a behaviour to the target that makes it attracted to the player.
+---
+---@param TargetObject string
+---@param BehaviourName "ATTRACTION"
+---@param MinWatchDistance number The minimum distance the target can be from the player.
+---@param MaxWatchDistance number The maximum distance the target can be from the player.
+---@param Speed number The speed the target moves towards the player.
+function Game.AddBehaviour(TargetObject, BehaviourName, MinWatchDistance, MaxWatchDistance, Speed) end
+
+---Adds a behaviour to the target that makes it evade the player.
+---
+---@param TargetObject string The name of a spawn point, actor or actor type.
+---@param BehaviourName "EVADE_PLAYER" A behaviour that makes the target evade the player.
+---@param MinEvadeDistanceHorizontal number The minimum horizontal distance between the target and the player.
+---@param MaxEvadeDistanceHorizontal number The maximum horizontal distance between the target and the player.
+---@param MinEvadeDistanceVertical number The minimum distance between the target and the ground.
+---@param MaxEvadeDistanceVertical number The maximum distance between the target and the ground.
+---@param Speed number The speed at which the target will evade the player.
+function Game.AddBehaviour(TargetObject, BehaviourName, MinEvadeDistanceHorizontal, MaxEvadeDistanceHorizontal, MinEvadeDistanceVertical, MaxEvadeDistanceVertical, Speed) end
+
+---Adds a behaviour to the target UFO that makes it attack... "all"?
+---
+---@param TargetObject string
+---@param BehaviourName "UFO_ATTACK_ALL"
+---@param TractorBeamName string
+function Game.AddBehaviour(TargetObject, BehaviourName, TractorBeamName) end
+
+---Adds a behaviour to the target UFO that makes its tractor beam always on.
+---
+---@param TargetObject string
+---@param BehaviourName "UFO_BEAM_ALWAYS_ON"
+---@param TractorBeamName string
+function Game.AddBehaviour(TargetObject, BehaviourName, TractorBeamName) end
 
 ---Adds a bonus mission to the level.
 ---
@@ -191,7 +232,15 @@ function Game.AddPurchaseCarReward(ShopName, CharacterName, CharacterAnimationSe
 
 -- TODO: AddSpawnPoint (Min: 8, Max: 8)
 
--- TODO: AddSpawnPointByLocatorScript (Min: 6, Max: 6)
+---Adds a spawn point to the level.
+---
+---@param SpawnPointName string The name of this spawn point. Should be unique.
+---@param StatePropName string The name of the sttate prop to use.
+---@param Unused_InstanceName string InstanceName. Unused.
+---@param LocatorName string The name of a locator.
+---@param Radius number The radius of the spawn point's sphere trigger.
+---@param Unused_Timeout integer Timeout. Unused.
+function Game.AddSpawnPointByLocatorScript(SpawnPointName, StatePropName, Unused_InstanceName, LocatorName, Radius, Unused_Timeout) end
 
 ---Adds a stage to the mission.
 ---
@@ -530,9 +579,14 @@ function Game.MustActionTrigger() end
 ---@param LocatorName string The name of the locator to place the car at.
 function Game.PlacePlayerCar(CarName, LocatorName) end
 
--- TODO: PreallocateActors (Min: 2, Max: 2)
+---Preallocates the specified number of the specified actor.
+---
+---@param StatePropName string The name of the actor's state prop.
+---@param NumberOfInstances integer The number to preallocate. Minimum of 0 and maximum of 20.
+function Game.PreallocateActors(StatePropName, NumberOfInstances) end
 
--- TODO: PutMFPlayerInCar (Min: 0, Max: 0)
+---Puts the player in their car at the start of the stage.
+function Game.PutMFPlayerInCar() end
 
 ---Sets this stage as the starting point when selecting or restarting the mission.
 function Game.RESET_TO_HERE() end
@@ -550,7 +604,11 @@ function Game.RESET_TO_HERE() end
 ---@param MissionIdentifier string The mission identifier such as m0, m0sd or sr1.
 function Game.SelectMission(MissionIdentifier) end
 
--- TODO: SetActorRotationSpeed (Min: 2, Max: 2)
+---Sets the rotation speed for actors of the given type.
+---
+---@param TypeName string An actor type name.
+---@param RotationSpeed number The rotation speed to use.
+function Game.SetActorRotationSpeed(TypeName, RotationSpeed) end
 
 -- TODO: SetAllowSeatSlide (Min: 1, Max: 1)
 
@@ -830,7 +888,12 @@ function Game.SetObjTargetVehicle(VehicleName) end
 ---@param P3DFilePath string The path to a P3D file containing the presentation bitmap Sprite.
 function Game.SetPresentationBitmap(P3DFilePath) end
 
--- TODO: SetProjectileStats (Min: 3, Max: 3)
+---Allocates projectiles of the given type.
+---
+---@param TypeName string The name of the projectile.
+---@param Speed number The speed of the allocated projectiles.
+---@param NumberOfInstances integer The number of projectiles to allocate. Max of 20.
+function Game.SetProjectileStats(TypeName, Speed, NumberOfInstances) end
 
 -- TODO: SetRaceEnteryFee (Min: 1, Max: 1)
 
