@@ -551,7 +551,7 @@ local ASFCommands = {
 	{ Name = "SetCondThreshold", MinArgs = 1, MaxArgs = 1, RequiresScope = "Condition" },
 	{ Name = "SetCondTotal", MinArgs = 1, MaxArgs = 1, RequiresScope = "Condition" },
 	{ Name = "SetCondTrigger", MinArgs = 1, MaxArgs = 1, RequiresScope = "Condition" },
-	{ Name = "SetConditionalParameter", MinArgs = 3, MaxArgs = 5, RequiresScope = "Condition" },
+	{ Name = "SetConditionalParameter", MinArgs = 3, MaxArgs = 5 },
 	{ Name = "SetHUDMapDrawable", MinArgs = 1, MaxArgs = 1, RequiresScope = "Mission" },
 	{ Name = "SetHitAndRunDecayHitAndRun", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetHitAndRunFine", MinArgs = 1, MaxArgs = 1 },
