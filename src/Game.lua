@@ -11,8 +11,11 @@ local Game = Game
 local HackCommandCounts = {}
 
 local string_gsub = string.gsub
+local string_unpack = string.unpack
 
 local table_concat = table.concat
+
+local utf8_char = utf8.char
 
 local GetPath = GetPath
 local Output = Output
@@ -41,62 +44,48 @@ local Limits = {
 }
 
 if IsHackLoaded("CustomLimits") and Exists(GetModPath() .. "/CustomLimits.ini", true, false) then
+	local fmtMap = {
+		["\xFF\xFE"] = "<H", -- UTF-16LE
+		["\xFE\xFF"] = ">H", -- UTF-16BE
+	}
 	local function ReadTextFile(path)
 		local content = ReadFile(path)
+		local contentN = #content
 		if not content then
 			return nil
 		end
 		
-		if content:sub(1, 3) == "\xEF\xBB\xBF" then -- UTF-8 BOM
+		if contentN >= 3 and content:sub(1, 3) == "\xEF\xBB\xBF" then -- UTF-8 BOM
 			return content:sub(4)
 		end
 		
-		if content:sub(1, 2) == "\xFF\xFE" then -- UTF-16LE
-			content = content:sub(3)
-			local out = {}
-			local i = 1
-			while i <= #content - 1 do
-				local lo = string.byte(content, i)
-				local hi = string.byte(content, i + 1)
-				local codepoint = hi * 256 + lo
-				i = i + 2
+		if contentN >= 2 then -- UTF-16
+			local fmt = fmtMap[content:sub(1, 2)]
+			
+			if fmt then
+				local out = {}
+				local outN = 0
+				local i = 3
 				
-				if codepoint >= 0xD800 and codepoint <= 0xDBFF and i <= #content - 1 then
-					local lo2 = string.byte(content, i)
-					local hi2 = string.byte(content, i + 1)
-					local codepoint2 = hi2 * 256 + lo2
-					if codepoint2 >= 0xDC00 and codepoint2 <= 0xDFFF then
-						codepoint = 0x10000 + ((codepoint - 0xD800) * 0x400) + (codepoint2 - 0xDC00)
-						i = i + 2
+				local codepoint
+				while i <= #content do
+					codepoint, i = string_unpack(fmt, content, i)
+					
+					-- Handle surrogate pairs
+					if codepoint >= 0xD800 and codepoint <= 0xDBFF and i <= #content then
+						local low, ni2 = string_unpack(fmt, content, i)
+						if low >= 0xDC00 and low <= 0xDFFF then
+							codepoint = 0x10000 + ((codepoint - 0xD800) * 0x400) + (low - 0xDC00)
+							i = ni2
+						end
 					end
+					
+					outN = outN + 1
+					out[outN] = utf8_char(codepoint)
 				end
-				out[#out + 1] = utf8.char(codepoint)
+
+				return table_concat(out)
 			end
-			return table.concat(out)
-		end
-		
-		if content:sub(1, 2) == "\xFE\xFF" then --UTF-16BE
-			content = content:sub(3)
-			local out = {}
-			local i = 1
-			while i <= #content - 1 do
-				local hi = string.byte(content, i)
-				local lo = string.byte(content, i + 1)
-				local codepoint = hi * 256 + lo
-				i = i + 2
-				
-				if codepoint >= 0xD800 and codepoint <= 0xDBFF and i <= #content - 1 then
-					local hi2 = string.byte(content, i)
-					local lo2 = string.byte(content, i + 1)
-					local codepoint2 = hi2 * 256 + lo2
-					if codepoint2 >= 0xDC00 and codepoint2 <= 0xDFFF then
-						codepoint = 0x10000 + ((codepoint - 0xD800) * 0x400) + (codepoint2 - 0xDC00)
-						i = i + 2
-					end
-				end
-				out[#out + 1] = utf8.char(codepoint)
-			end
-			return table.concat(out)
 		end
 		
 		return content -- Assume normal UTF-8
