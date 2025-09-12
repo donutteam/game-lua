@@ -50,9 +50,13 @@ if IsHackLoaded("CustomLimits") and Exists(GetModPath() .. "/CustomLimits.ini", 
 	}
 	local function ReadTextFile(path)
 		local content = ReadFile(path)
-		local contentN = #content
 		if not content then
 			return nil
+		end
+		
+		local contentN = #content
+		if contentN == 0 then
+			return ""
 		end
 		
 		if contentN >= 3 and content:sub(1, 3) == "\xEF\xBB\xBF" then -- UTF-8 BOM
@@ -68,11 +72,11 @@ if IsHackLoaded("CustomLimits") and Exists(GetModPath() .. "/CustomLimits.ini", 
 				local i = 3
 				
 				local codepoint
-				while i <= #content do
+				while i <= contentN do
 					codepoint, i = string_unpack(fmt, content, i)
 					
 					-- Handle surrogate pairs
-					if codepoint >= 0xD800 and codepoint <= 0xDBFF and i <= #content then
+					if codepoint >= 0xD800 and codepoint <= 0xDBFF and i + 1 <= contentN then
 						local low, ni2 = string_unpack(fmt, content, i)
 						if low >= 0xDC00 and low <= 0xDFFF then
 							codepoint = 0x10000 + ((codepoint - 0xD800) * 0x400) + (low - 0xDC00)
