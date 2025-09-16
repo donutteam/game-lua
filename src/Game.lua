@@ -173,6 +173,10 @@ local function AddCommand(Command, Hack)
 			if Command.RequiresScope then
 				assert(OpenScopes[Command.RequiresScope], Command.Name .. " requires scope \"" .. Command.RequiresScope .. "\" but it is not open.")
 			end
+			if Command.Validator then
+				local err = Command.Validator(args, argsN)
+				assert(err == nil, Command.Name .. " failed validation: " .. tostring(err))
+			end
 			if Command.OpensScope then
 				assert(OpenScopes[Command.OpensScope] == nil, Command.Name .. " opens scope \"" .. Command.OpensScope .. "\" but it is already open.")
 				OpenScopes[Command.OpensScope] = Command.RequiresScope or true
@@ -389,7 +393,11 @@ local DefaultCommands = {
 	{ Name = "SetCMOffsetX", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetCMOffsetY", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetCMOffsetZ", MinArgs = 1, MaxArgs = 1 },
-	{ Name = "SetCamBestSide", MinArgs = 1, MaxArgs = 2, RequiresScope = "Stage" },
+	{ Name = "SetCamBestSide", MinArgs = 1, MaxArgs = 2, Validator = function(args, argsN)
+		if argsN == 1 then
+			assert(OpenScopes["Stage"], "SetCamBestSide requires scope \"Stage\" but it is not open.")
+		end
+	end },
 	{ Name = "SetCarAttributes", MinArgs = 5, MaxArgs = 5 },
 	{ Name = "SetCarStartCamera", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetCharacterPosition", MinArgs = 3, MaxArgs = 3 },
@@ -406,7 +414,11 @@ local DefaultCommands = {
 	{ Name = "SetCondTargetVehicle", MinArgs = 1, MaxArgs = 1, RequiresScope = "Condition" },
 	{ Name = "SetCondTime", MinArgs = 1, MaxArgs = 1, RequiresScope = "Condition" },
 	{ Name = "SetConditionPosition", MinArgs = 1, MaxArgs = 1, RequiresScope = "Condition" },
-	{ Name = "SetConversationCam", MinArgs = 2, MaxArgs = 3, RequiresScope = "Stage" },
+	{ Name = "SetConversationCam", MinArgs = 2, MaxArgs = 3, Validator = function(args, argsN)
+		if argsN == 2 then
+			assert(OpenScopes["Stage"], "SetConversationCam requires scope \"Stage\" but it is not open.")
+		end
+	end },
 	{ Name = "SetConversationCamDistance", MinArgs = 2, MaxArgs = 2, RequiresScope = "Stage" },
 	{ Name = "SetConversationCamName", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
 	{ Name = "SetConversationCamNpcName", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
