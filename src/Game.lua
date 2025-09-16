@@ -395,9 +395,9 @@ local DefaultCommands = {
 	{ Name = "SetCMOffsetZ", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetCamBestSide", MinArgs = 1, MaxArgs = 2, Validator = function(args, argsN)
 		if argsN == 1 then
-			assert(OpenScopes["Stage"], Command.Name .. " requires scope \"Stage\" but it is not open.")
+			assert(OpenScopes["Stage"], "SetCamBestSide requires scope \"Stage\" but it is not open.")
 		end
-	end) },
+	end },
 	{ Name = "SetCarAttributes", MinArgs = 5, MaxArgs = 5 },
 	{ Name = "SetCarStartCamera", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetCharacterPosition", MinArgs = 3, MaxArgs = 3 },
@@ -416,9 +416,9 @@ local DefaultCommands = {
 	{ Name = "SetConditionPosition", MinArgs = 1, MaxArgs = 1, RequiresScope = "Condition" },
 	{ Name = "SetConversationCam", MinArgs = 2, MaxArgs = 3, Validator = function(args, argsN)
 		if argsN == 2 then
-			assert(OpenScopes["Stage"], Command.Name .. " requires scope \"Stage\" but it is not open.")
+			assert(OpenScopes["Stage"], "SetConversationCam requires scope \"Stage\" but it is not open.")
 		end
-	end) },
+	end },
 	{ Name = "SetConversationCamDistance", MinArgs = 2, MaxArgs = 2, RequiresScope = "Stage" },
 	{ Name = "SetConversationCamName", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
 	{ Name = "SetConversationCamNpcName", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
