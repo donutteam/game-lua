@@ -396,8 +396,8 @@ local DefaultCommands = {
 	{ Name = "SetCMOffsetY", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetCMOffsetZ", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetCamBestSide", MinArgs = 1, MaxArgs = 2, Validator = function(args, argsN)
-		if argsN == 1 then
-			assert(OpenScopes["Stage"], "SetCamBestSide requires scope \"Stage\" but it is not open.")
+		if argsN == 1 and not OpenScopes["Stage"] then
+			return "when called with 1 argument, requires scope \"Stage\" but it is not open."
 		end
 	end },
 	{ Name = "SetCarAttributes", MinArgs = 5, MaxArgs = 5 },
@@ -417,8 +417,8 @@ local DefaultCommands = {
 	{ Name = "SetCondTime", MinArgs = 1, MaxArgs = 1, RequiresScope = "Condition" },
 	{ Name = "SetConditionPosition", MinArgs = 1, MaxArgs = 1, RequiresScope = "Condition" },
 	{ Name = "SetConversationCam", MinArgs = 2, MaxArgs = 3, Validator = function(args, argsN)
-		if argsN == 2 then
-			assert(OpenScopes["Stage"], "SetConversationCam requires scope \"Stage\" but it is not open.")
+		if argsN == 2 and not OpenScopes["Stage"] then
+			return "when called with 2 arguments, requires scope \"Stage\" but it is not open."
 		end
 	end },
 	{ Name = "SetConversationCamDistance", MinArgs = 2, MaxArgs = 2, RequiresScope = "Stage" },
