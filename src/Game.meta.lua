@@ -31,7 +31,10 @@ error("Meta files should not be executed.")
 
 Game = {}
 
--- TODO: ActivateTrigger (Min: 1, Max: 1)
+---Activates a locator and its triggers.
+---
+---@param LocatorName string
+function Game.ActivateTrigger(LocatorName) end
 
 ---Activates a vehicle added with AddStageVehicle in a previous stage.
 ---
@@ -403,7 +406,10 @@ function Game.CreatePedGroup(PedGroupIndex) end
 ---@param TrafficGroupIndex integer The index of the traffic group to create.
 function Game.CreateTrafficGroup(TrafficGroupIndex) end
 
--- TODO: DeactivateTrigger (Min: 1, Max: 1)
+---Deactivates a locator and its triggers.
+---
+---@param LocatorName string
+function Game.DeactivateTrigger(LocatorName) end
 
 -- TODO: DisableHitAndRun (Min: 0, Max: 0)
 
