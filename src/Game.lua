@@ -49,6 +49,7 @@ if IsHackLoaded("CustomLimits") and Exists(GetModPath() .. "/CustomLimits.ini", 
 		["\xFE\xFF"] = ">H", -- UTF-16BE
 	}
 	local function ReadTextFile(path)
+		---@diagnostic disable-next-line: undefined-global
 		local content = ReadFile(path)
 		if not content then
 			return nil
@@ -97,6 +98,7 @@ if IsHackLoaded("CustomLimits") and Exists(GetModPath() .. "/CustomLimits.ini", 
 	
 	local CustomLimits = ReadTextFile(GetModPath() .. "/CustomLimits.ini")
 	local currentHeader
+	---@diagnostic disable-next-line: need-check-nil
 	for line in CustomLimits:gmatch("[^\n\r]+") do
 		local header = line:match("^%s*%[(.-)%]%s*$")
 		if line:match("^%s*[;#]") then
