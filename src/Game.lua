@@ -600,6 +600,23 @@ local ASFCommands = {
 	{ Name = "SetVehicleCharacterVisible", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "SetWheelieOffsetX", MinArgs = 1, MaxArgs = 1 },
 	{ Name = "UseTrafficGroup", MinArgs = 1, MaxArgs = 1, RequiresScope = "Mission" },
+
+	-- Added in Version 1.27
+	{ Name = "AddStageDynaLoadData", MinArgs = 1, MaxArgs = 2, RequiresScope = "Stage" },
+	{ Name = "IfAllCheatsEnabled", MinArgs = 1, MaxArgs = 15, Conditional = true },
+	{ Name = "IfAllMissionsCompleted", MinArgs = 1, MaxArgs = 15, Conditional = true },
+	{ Name = "IfAnyCheatEnabled", MinArgs = 1, MaxArgs = 15, Conditional = true },
+	{ Name = "IfAnyMissionCompleted", MinArgs = 1, MaxArgs = 15, Conditional = true },
+	{ Name = "IfCurrentCar", MinArgs = 1, MaxArgs = 15, Conditional = true },
+	{ Name = "IfCurrentSkin", MinArgs = 1, MaxArgs = 15, Conditional = true },
+	{ Name = "IfCurrentLevel", MinArgs = 1, MaxArgs = 15, Conditional = true },
+	{ Name = "IfRewardUnlocked", MinArgs = 2, MaxArgs = 2, Conditional = true },
+	{ Name = "IfStartedInCar", MinArgs = 0, MaxArgs = 0, Conditional = true, RequiresScope = "Mission" },
+	{ Name = "SetStageAirGravity", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
+	{ Name = "SetStageDynaLoadData", MinArgs = 1, MaxArgs = 2, RequiresScope = "Stage" },
+	{ Name = "SetStageEnabledCheats", MinArgs = 1, MaxArgs = 15, RequiresScope = "Stage" },
+	{ Name = "SetStageKickForce", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
+	{ Name = "SetStageSlamForce", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
 }
 
 local DebugTestCommands = {
