@@ -1306,6 +1306,14 @@ function Game.Not() end
 
 -- TODO: AddParkedCar (Min: 1, Max, 1)
 
+---Executes the specified dyna load data to be upon reaching the stage.
+---
+---Already loaded regions will remain loaded unless explicitly unloaded.
+---
+---@param DynaLoadData string A dyna load data string.
+---@param InteriorName string | nil The name of the interior the player starts in, if they start in one.
+function Game.AddStageDynaLoadData(DynaLoadData, InteriorName) end
+
 -- TODO: AddStageVehicleCharacter (Min: 2, Max, 4)
 
 -- TODO: AddVehicleCharacter (Min: 1, Max, 3)
@@ -1315,6 +1323,22 @@ function Game.Not() end
 -- TODO: CHECKPOINT_HERE (Min: 0, Max, 0)
 
 -- TODO: DisableTrigger (Min: 1, Max, 1)
+
+-- TODO: IfAllCheatsEnabled (Min: 1, Max: 15)
+
+-- TODO: IfAllMissionsCompleted (Min: 1, Max: 15)
+
+-- TODO: IfAnyCheatEnabled (Min: 1, Max: 15)
+
+-- TODO: IfAllCheatsEnabled (Min: 1, Max 15)
+
+-- TODO: IfCurrentCar (Min: 1, Max: 15)
+
+-- TODO: IfCurrentSkin (Min: 1, Max: 15)
+
+-- TODO: IfRewardUnlocked (Min: 2, Max: 2)
+
+-- TODO: IfStartedInCar (Min: 0, Max: 0)
 
 -- TODO: IfCurrentCheckpoint (Min: 0, Max: 0, Conditional)
 
@@ -1406,11 +1430,23 @@ function Game.SetParkedCarsEnabled(Enabled) end
 ---@param Enabled integer Whether pedestrians are enabled.
 function Game.SetPedsEnabled(Enabled) end
 
+-- TODO: SetStageAirGravity (Min: 1, Max: 1)
+
 -- TODO: SetStageAllowMissionCancel (Min: 1, Max, 1)
 
 -- TODO: SetStageCarChangeHitAndRunChange (Min: 1, Max, 1)
 
 -- TODO: SetStageCharacterModel (Min: 1, Max, 2)
+
+---Executes the specified dyna load data to be upon reaching the stage.
+---
+---All loaded regions will be unloaded before loading new regions.
+---
+---@param DynaLoadData string A dyna load data string.
+---@param InteriorName string | nil The name of the interior the player starts in, if they start in one.
+function Game.SetStageDynaLoadData(DynaLoadData, InteriorName) end
+
+-- TODO: SetStageEnabledCheats (Min: 1, Max: 15)
 
 -- TODO: SetStageHitAndRun (Min: 1, Max, 1)
 
@@ -1422,9 +1458,25 @@ function Game.SetPedsEnabled(Enabled) end
 
 -- TODO: SetStageHitAndRunFine (Min: 1, Max, 1)
 
+-- TODO: SetStageKickForce (Min: 1, Max: 1)
+
+-- TODO: SetStageSlamForce (Min: 1, Max: 1)
+
 -- TODO: SetStageNumChaseCars (Min: 1, Max, 1)
 
 -- TODO: SetStagePayout (Min: 1, Max, 1)
+
+---Changes the active ped group upon reaching the stage.
+---
+---@param PedGroupIndex integer
+function Game.SetStagePedGroup(PedGroupIndex) end
+
+---Changes the active traffic group upon reaching the stage.
+---
+---You must use the CustomTrafficSupport hack to have multiple traffic groups.
+---
+---@param TrafficGroupIndex integer
+function Game.SetStageTrafficGroup(TrafficGroupIndex) end
 
 -- TODO: SetStageVehicleAbductable (Min: 2, Max, 2)
 
