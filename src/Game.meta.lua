@@ -14,8 +14,7 @@ error("Meta files should not be executed.")
 
 ---@alias GameTypes.GagTriggerType "action" | "touch"
 
--- MAYBE: This should maybe include "AI" because the game checks for it but that's weird as fuck
----@alias GameTypes.PlayerVehicleSlotType "DEFAULT" | "OTHER"
+---@alias GameTypes.Heap "GMA_DEFAULT" | "GMA_TEMP" | "GMA_PERSISTENT" | "GMA_LEVEL_MOVIE" | "GMA_LEVEL" | "GMA_LEVEL_MOVIE" | "GMA_LEVEL_FE" | "GMA_LEVEL_ZONE" | "GMA_LEVEL_OTHER" | "GMA_LEVEL_HUD" | "GMA_LEVEL_MISSION" | "GMA_LEVEL_AUDIO" | "GMA_DEBUG" | "GMA_SPECIAL"
 
 ---@alias GameTypes.RewardQuestType "bonusmission" | "cards" | "defaultcar" | "defaultskin" | "forsale" | "goldcards" | "streetrace"
 
@@ -24,6 +23,8 @@ error("Meta files should not be executed.")
 ---@alias GameTypes.RewardType "car" | "skin"
 
 ---@alias GameTypes.RoadArrowType "BOTH" | "both" | "b" | "NEITHER" | "neither" | "n" | "INTERSECTION" | "intersection" | "i" | "NEAREST ROAD" | "nearest road"
+
+---@alias GameTypes.VehicleSlotType "AI" | "DEFAULT" | "OTHER"
 
 --
 -- Globals
@@ -44,13 +45,40 @@ function Game.ActivateTrigger(LocatorName) end
 ---@param DriverName string | nil The name of the driver for the vehicle. Optional.
 function Game.ActivateVehicle(VehicleName, LocatorName, AIType, DriverName) end
 
--- TODO: AddAmbientCharacter (Min: 2, Max: 3)
+---Adds an ambient character to a level.
+---
+---@param CharacterName string The name of the character.
+---@param LocatorName string The name of a locator.
+---@param TalkToRadius number | nil The radius of the trigger to talk to the character. Optional, defaults to 1.3.
+function Game.AddAmbientCharacter(CharacterName, LocatorName, TalkToRadius) end
 
--- TODO: AddAmbientNPCWaypoint (Min: 2, Max: 2)
+---Adds a waypoint for an ambient character to walk to in a level.
+---
+---@param CharacterName string The name of the character.
+---@param LocatorName string The name of a locator.
+function Game.AddAmbientNPCWaypoint(CharacterName, LocatorName) end
 
--- TODO: AddAmbientNpcAnimation (Min: 1, Max: 2)
+---Adds an animation to a NPC while talking to them in a mission.
+---
+---@param AnimationName string The name of an animation.
+function Game.AddAmbientNpcAnimation(AnimationName) end
 
--- TODO: AddAmbientPcAnimation (Min: 1, Max: 2)
+---Adds an animation to a bonus mission NPC while talking to them in a level.
+---
+---@param AnimationName string The name of an animation.
+---@param BonusMissionName string The name of a bonus mission in the level.
+function Game.AddAmbientNpcAnimation(AnimationName, BonusMissionName) end
+
+---Adds an animation to the player while talking to an NPC in a mission.
+---
+---@param AnimationName string The name of an animation.
+function Game.AddAmbientPcAnimation(AnimationName) end
+
+---Adds an animation to the player while talking to a bonus mission NPC in a level.
+---
+---@param AnimationName string The name of an animation.
+---@param BonusMissionName string The name of a bonus mission in the level.
+function Game.AddAmbientPcAnimation(AnimationName, BonusMissionName) end
 
 ---Adds a behaviour to the target that makes it attack the player.
 ---
@@ -100,7 +128,11 @@ function Game.AddBehaviour(TargetObject, BehaviourName, TractorBeamName) end
 ---@param BonusMissionIdentifier string The identifier of the bonus mission.
 function Game.AddBonusMission(BonusMissionIdentifier) end
 
--- TODO: AddBonusMissionNPCWaypoint (Min: 2, Max: 2)
+---Adds a waypoint to a bonus mission NPC in a level.
+---
+---@param CharacterName string The name of a character.
+---@param LocatorName string The name of a locator.
+function Game.AddBonusMissionNPCWaypoint(CharacterName, LocatorName) end
 
 -- TODO: AddBonusObjective (Min: 1, Max: 2)
 
@@ -121,10 +153,15 @@ function Game.AddCharacter(CharacterName, ChoreographyName) end
 ---@param LocatorName string The name of the locator to add the collectible to. The position of the locator does not matter for "dump" objectives.
 ---@param DrawableName string | nil The name of the drawable to use.
 ---@param NoBoxConversationName string | nil The name of the conversation to play when the collectible is picked up. Optional.
----@param NoBoxConversationCharacterName string | nil The name of a second character in the conversation. Optional if the only character talking is the player.
+---@param NoBoxConversationCharacterName string | nil The name of a second character in the conversation. Optional, if the only character talking is the player.
 function Game.AddCollectible(LocatorName, DrawableName, NoBoxConversationName, NoBoxConversationCharacterName) end
 
--- TODO: AddCollectibleStateProp (Min: 3, Max: 3)
+---Adds a collectible state prop to a mission.
+---
+---@param StatePropName string The name of a state prop.
+---@param LocatorName string The name of a locator.
+---@param AtcEntryIndex integer The index of an entry in the ATC file used to create collision attributes for the prop.
+function Game.AddCollectibleStateProp(StatePropName, LocatorName, AtcEntryIndex) end
 
 ---Adds a condition to a stage.
 ---
@@ -145,11 +182,30 @@ function Game.AddCondition(ConditionType, CollectibleName) end
 ---@param NumberOfStagesToGoBack integer | nil The number of stages to go back if the user drops the barrel. Optional, defaults to 1.
 function Game.AddCondition(ConditionType, NumberOfStagesToGoBack) end
 
--- TODO: AddDriver (Min: 2, Max: 2)
+---Adds a driver to a car in a stage.
+---
+---@param CharacterName string The name of an NPC.
+---@param MissionCarName string The name of a mission car.
+function Game.AddDriver(CharacterName, MissionCarName) end
 
--- TODO: AddFlyingActor (Min: 5, Max: 5)
+---Adds a flying actor to the world using XYZ coordinates.
+---
+---There is no way to tell the game to not despawn the actor with this command, so you *probably* want AddFlyingActorByLocator instead.
+---
+---@param StatePropName string The name of a state prop.
+---@param InstanceName string The name of this instance.
+---@param X number The X position.
+---@param Y number The Y position.
+---@param Z number The Z position.
+function Game.AddFlyingActor(StatePropName, InstanceName, X, Y, Z) end
 
--- TODO: AddFlyingActorByLocator (Min: 3, Max: 4)
+---Adds a flying actor to the world using a locator.
+---
+---@param StatePropName string The name of a state prop.
+---@param InstanceName string The name of this instance.
+---@param LocatorName string The name of a locator.
+---@param NeverDespawnString "NEVER_DESPAWN" | nil Makes it so the actor will never be despawned. Optional.
+function Game.AddFlyingActor(StatePropName, InstanceName, LocatorName, NeverDespawnString) end
 
 ---Binds a gag to an interior.
 ---
@@ -170,16 +226,24 @@ function Game.AddGlobalProp(UnusedArgument1) end
 ---@param MissionIdentifier string The mission identifier such as m0 or m1.
 function Game.AddMission(MissionIdentifier) end
 
--- TODO: AddNPC (Min: 2, Max: 3)
-
 ---Adds an NPC to an objective.
 ---
----@param NPCName string The name of the NPC to add.
+---@param CharacterName string The name of the NPC to add.
 ---@param LocatorName string The name of the locator to add the NPC to.
 ---@param UnusedArgument3 any Unused by the game.
-function Game.AddNPC(NPCName, LocatorName, UnusedArgument3) end
+function Game.AddNPC(CharacterName, LocatorName, UnusedArgument3) end
 
--- TODO: AddNPCCharacterBonusMission (Min: 7, Max: 8)
+---Adds a bonus mission NPC to a level.
+---
+---@param CharacterName string The name of the character to add.
+---@param ChoreographyName string The name of a choreography to use.
+---@param LocatorName string The name of the locator to place the character at.
+---@param MissionName string The name of the mission that talking to this NPC will start.
+---@param IconName string The floating icon drawable to use if the mission has not been completed before.
+---@param DialogueName string The name of the dialogue to use when talking to the NPC.
+---@param IsReplayable integer When set to 1, the player can play the mission again after completing it once. For bm1, you will also need to require the Replayable Bonus Missions hack for this to work as expected.
+---@param CompletedIconName string | nil The floating icon drawable to use if the mission has been completed before. Optional.
+function Game.AddNPCCharacterBonusMission(CharacterName, ChoreographyName, LocatorName, MissionName, IconName, DialogueName, IsReplayable, CompletedIconName) end
 
 ---Adds an objective to a stage.
 ---
@@ -209,7 +273,11 @@ function Game.AddObjective(ObjectiveType, CarName) end
 ---@param RoadArrowType GameTypes.RoadArrowType | nil Indicates where road arrows should be placed when guiding the player to their destination.
 function Game.AddObjective(ObjectiveType, Gamble, RoadArrowType) end
 
--- TODO: AddObjectiveNPCWaypoint (Min: 2, Max: 2)
+---Adds a waypoint to an NPC in a stage.
+---
+---@param CharacterName string The name of the character to add the waypoint to.
+---@param LocatorName string The name of the locator to use as the waypoint.
+function Game.AddObjectiveNPCWaypoint(CharacterName, LocatorName) end
 
 ---Adds a ped to the current ped group.
 ---
@@ -217,7 +285,11 @@ function Game.AddObjective(ObjectiveType, Gamble, RoadArrowType) end
 ---@param MaxAmount integer The maximum amount of this character that can appear at once.
 function Game.AddPed(CharacterName, MaxAmount) end
 
--- TODO: AddPurchaseCarNPCWaypoint (Min: 2, Max: 2)
+---Adds a waypoint to a purchase car NPC in a level.
+---
+---@param CharacterName string The name of the character to add the waypoint to.
+---@param LocatorName string The name of the locator to use as the waypoint.
+function Game.AddPurchaseCarNPCWaypoint(CharacterName, LocatorName) end
 
 ---Adds a purchase car NPC to the level.
 ---
@@ -229,16 +301,36 @@ function Game.AddPed(CharacterName, MaxAmount) end
 ---@param CarLocatorName string The name of the locator to place the car at.
 function Game.AddPurchaseCarReward(ShopName, CharacterName, CharacterAnimationSetName, CharacterLocatorName, CharacterTriggerRadius, CarLocatorName) end
 
--- TODO: AddSafeZone (Min: 2, Max: 2)
+---Adds a safe zone to a stage.
+---
+---When the player is within the specified radius of the locator during a Hit & Run, the chase cars will stop chasing them.
+---
+---@param LocatorName string The name of a locator.
+---@param Radius number The radius of the safe zone.
+function Game.AddSafeZone(LocatorName, Radius) end
 
--- TODO: AddShield (Min: 2, Max: 2)
+---Adds a shield to actors of the specified type.
+---
+---@param ActorType string The type of actor to add the shield to.
+---@param StatePropName string The name of the shield state prop.
+function Game.AddShield(ActorType, StatePropName) end
 
--- TODO: AddSpawnPoint (Min: 8, Max: 8)
-
----Adds a spawn point to the level.
+---Adds a spawn point to the level using XYZ coordinates.
 ---
 ---@param SpawnPointName string The name of this spawn point. Should be unique.
----@param StatePropName string The name of the sttate prop to use.
+---@param StatePropName string name of the state prop to use.
+---@param Unused_InstanceName string InstanceName. Unused.
+---@param X number The X position of the spawn point.
+---@param Y number The Y position of the spawn point.
+---@param Z number The Z position of the spawn point.
+---@param Radius number The radius of the spawn point's sphere trigger.
+---@param Unused_Timeout string Timeout. Unused.
+function Game.AddSpawnPoint(SpawnPointName, StatePropName, Unused_InstanceName, X, Y, Z, Radius, Unused_Timeout) end
+
+---Adds a spawn point to the level using a locator.
+---
+---@param SpawnPointName string The name of this spawn point. Should be unique.
+---@param StatePropName string The name of the state prop to use.
 ---@param Unused_InstanceName string InstanceName. Unused.
 ---@param LocatorName string The name of a locator.
 ---@param Radius number The radius of the spawn point's sphere trigger.
@@ -280,7 +372,18 @@ function Game.AddStage(Locked1, LockedType1, RequiredCarOrSkinName1, Locked2, Lo
 
 -- TODO: AddStageCharacter (Min: 3, Max: 5)
 
--- TODO: AddStageMusicChange (Min: 0, Max: 0)
+---Triggers the drama variant of the current music upon reaching a stage if any condition is "close" to failing.
+---
+---"outofvehicle" conditions are considered close to failing if the player has >1 second and <3 seconds left on the condition's timer.
+---
+---"race" conditions are considered close to failing if the AI has only 1 waypoint left.
+---
+---"timeout" conditions are considered close to failing if the player has 20 seconds or less left on the stage's timer.
+---
+---"leaveinterior" and "outofbounds" conditions are never considered close to failing.
+---
+---All other condition types are always considered close to failing.
+function Game.AddStageMusicChange() end
 
 ---Adds time to an existing stage timer upon reaching the stage.
 ---
@@ -301,9 +404,31 @@ function Game.AddStageVehicle(VehicleName, LocatorName, AIType, CONFilePath, Dri
 ---@param LocatorName string The name of the locator to add the waypoint to.
 function Game.AddStageWaypoint(LocatorName) end
 
--- TODO: AddTeleportDest (Min: 3, Max: 5)
+---Adds a teleport destination using a locator.
+---
+---There is no way to use these in the original game.
+---
+---@param Name string The name of the teleport destination.
+---@param LocatorName string The name of a locator.
+---@param DynaLoadData string A dyna load data string executed upon teleporting.
+function Game.AddTeleportDest(Name, LocatorName, DynaLoadData) end
 
--- TODO: AddToCountdownSequence (Min: 1, Max: 2)
+---Adds a teleport destination using XYZ coordinates.
+---
+---There is no way to use these in the original game.
+---
+---@param Name string The name of the teleport destination.
+---@param X number The X position.
+---@param Y number The Y position.
+---@param Z number The Z position.
+---@param DynaLoadData string A dyna load data string executed upon teleporting.
+function Game.AddTeleportDest(Name, X, Y, Z, DynaLoadData) end
+
+---Adds a step to a countdown sequence.
+---
+---@param StringName string The name of a text string to show on the screen.
+---@param Duration integer | nil The amount of milliseconds this string should be shown for. Optional, defaults to 1000.
+function Game.AddToCountdownSequence(StringName, Duration) end
 
 ---Adds a traffic model to the current traffic group.
 ---
@@ -321,17 +446,38 @@ function Game.AddTrafficModel(CarName, Amount, IsParkedCar) end
 ---@param UnusedArgument3 any
 function Game.AddVehicleSelectInfo(UnusedArgument1, UnusedArgument2, UnusedArgument3) end
 
--- TODO: AllowMissionAbort (Min: 1, Max: 1)
+---Sets if the user can cancel a dialogue stage.
+---
+---@param IsAllowed "false" | string If "false", the user cannot cancel the dialog. Anything else has no effect.
+function Game.AllowMissionAbort(IsAllowed) end
 
--- TODO: AllowRockOut (Min: 0, Max: 0)
+---Sets if the player character is allowed to perform a rocking out animation after being left idle for a few seconds during the objective.
+function Game.AllowRockOut() end
 
--- TODO: AllowUserDump (Min: 0, Max: 0)
+---Sets if the player can lose collectibles during a "delivery" objective by getting hit by another car.
+function Game.AllowUserDump() end
 
--- TODO: AmbientAnimationRandomize (Min: 2, Max: 2)
+---Sets if a character's animations should be randomised during a stage with a "dialogue" objective.
+---
+---@param CharacterNumber 0 | 1 The character to target. 0 for the player, 1 for the NPC.
+---@param Randomize 0 | 1 Whether the character's animations should be randomised.
+function Game.AmbientAnimationRandomize(CharacterNumber, Randomize) end
 
--- TODO: AttachStatePropCollectible (Min: 2, Max: 2)
+---Attaches a state prop collectible to the specified car.
+---
+---Unused in the base game but seems to work?
+---
+---@param CarName string The name of a car.
+---@param StatePropName string The name of a state prop.
+function Game.AttachStatePropCollectible(CarName, StatePropName) end
 
--- TODO: BindCollectibleTo (Min: 2, Max: 2)
+---Binds a collectible to be dropped near a particular waypoint during a "dump" objective.
+---
+---This should either be called for all or none of the collectibles. Calling it will disable the player's ability to hit the AI car to get it to drop stuff.
+---
+---@param CollectibleIndex integer The index of the collectible.
+---@param WaypointIndex integer The index of the waypoint it sohuld be dropped near.
+function Game.BindCollectibleTo(CollectibleIndex, WaypointIndex) end
 
 ---Binds a reward to a quest type.
 ---
@@ -355,7 +501,10 @@ function Game.BindReward(Name, FilePath, Type, QuestType, Level, CoinCost, Selle
 
 -- TODO: CharacterIsChild (Min: 1, Max: 1)
 
--- TODO: ClearAmbientAnimations (Min: 1, Max: 1)
+---Clears ambient animations for the given mission.
+---
+---@param MissionName string The name of the mission.
+function Game.ClearAmbientAnimations(MissionName) end
 
 ---Clears gag bindings.
 function Game.ClearGagBindings() end
@@ -385,9 +534,20 @@ function Game.CloseStage() end
 ---Ends initializing the current traffic group.
 function Game.CloseTrafficGroup() end
 
--- TODO: CreateActionEventTrigger (Min: 5, Max: 5)
+---Does nothing.
+---
+---@param UnusedArgument1 any
+---@param UnusedArgument2 any
+---@param UnusedArgument3 any
+---@param UnusedArgument4 any
+---@param UnusedArgument5 any
+function Game.CreateActionEventTrigger(UnusedArgument1, UnusedArgument2, UnusedArgument3, UnusedArgument4, UnusedArgument5) end
 
--- TODO: CreateAnimPhysObject (Min: 2, Max: 2)
+---Does nothing.
+---
+---@param UnusedArgument1 any
+---@param UnusedArgument2 any
+function Game.CreateAnimPhysObject(UnusedArgument1, UnusedArgument2) end
 
 ---Creates a chase manager for the level.
 ---
@@ -415,7 +575,12 @@ function Game.DeactivateTrigger(LocatorName) end
 
 -- TODO: EnableHitAndRun (Min: 0, Max: 0)
 
--- TODO: EnableTutorialMode (Min: 1, Max: 1)
+---Sets if tutorial mode should be enabled for a level.
+---
+---If the player has non-default controls set, tutorial mode is disabled regardless.
+---
+---@param Enabled 0 | 1 Whether tutorial mode is enabled or not.
+function Game.EnableTutorialMode(Enabled) end
 
 ---Adds a gag to the level.
 ---
@@ -550,32 +715,60 @@ function Game.GagSetTrigger(Type, X, Y, Z, Radius) end
 ---@param Weight integer The probability of selecting this gag.
 function Game.GagSetWeight(Weight) end
 
--- TODO: GoToPsScreenWhenDone (Min: 0, Max: 0)
+---Makes the Patty & Selma screen, typically shown after completing a street race, show after a stage ends.
+function Game.GoToPsScreenWhenDone() end
 
 ---Initialises a vehicle for the level or a forced car mission.
 ---
 ---@param VehicleName string The name of the vehicle to initialise.
 ---@param LocatorName string The name of the locator to put the vehicle at.
----@param VehicleSlot GameTypes.PlayerVehicleSlotType The vehicle slot to put the vehicle in.
+---@param VehicleSlot GameTypes.VehicleSlotType The vehicle slot to put the vehicle in.
 ---@param CONFilePath string | nil The path to the CON file for the vehicle. Optional. Relative to "scripts/cars".
 function Game.InitLevelPlayerVehicle(VehicleName, LocatorName, VehicleSlot, CONFilePath) end
 
 -- TODO: KillAllChaseAI (Min: 1, Max: 1)
 
--- TODO: LinkActionToObject (Min: 5, Max: 5)
+---Does nothing.
+---
+---@param UnusedArgument1 any
+---@param UnusedArgument2 any
+---@param UnusedArgument3 any
+---@param UnusedArgument4 any
+---@param UnusedArgument5 any
+function Game.LinkActionToObject(UnusedArgument1, UnusedArgument2, UnusedArgument3, UnusedArgument4, UnusedArgument5) end
 
--- TODO: LinkActionToObjectJoint (Min: 5, Max: 5)
+---Does nothing.
+---
+---@param UnusedArgument1 any
+---@param UnusedArgument2 any
+---@param UnusedArgument3 any
+---@param UnusedArgument4 any
+---@param UnusedArgument5 any
+function Game.LinkActionToObjectJoint(UnusedArgument1, UnusedArgument2, UnusedArgument3, UnusedArgument4, UnusedArgument5) end
 
--- TODO: LoadDisposableCar (Min: 3, Max: 3)
+---Loads a disposable car into the specified slot.
+---
+---@param P3DFilePath string The path to the car's P3D file.
+---@param CarName string The name of the car.
+---@param Slot GameTypes.VehicleSlotType The slot to load the vehicle in to.
+function Game.LoadDisposableCar(P3DFilePath, CarName, Slot) end
 
--- TODO: LoadP3DFile (Min: 1, Max: 3)
+---Loads a P3D file.
+---
+---@param P3DFilePath string The path to the P3D file.
+---@param HeapName GameTypes.Heap | nil The heap to load the file into. Optional, defaults to "GMA_LEVEL_MISSION".
+---@param InventoryName any | nil Unknown. Optional.
+function Game.LoadP3DFile(P3DFilePath, HeapName, InventoryName) end
 
 -- TODO: MoveStageVehicle (Min: 3, Max: 3)
 
 ---Requires the player to interact with the trigger in a "goto" objective to complete the stage.
 function Game.MustActionTrigger() end
 
--- TODO: NoTrafficForStage (Min: 0, Max: 0)
+---Clears all traffic cars within a 200m radius of the player and sets the max traffic to 0 for the stage.
+---
+---Note: This will result in NO TRAFFIC until another stage, either in the same mission or another, calls SetMaxTraffic with a value of 1 or greater!
+function Game.NoTrafficForStage() end
 
 -- TODO: PlacePlayerAtLocatorName (Min: 1, Max: 1)
 
@@ -616,7 +809,10 @@ function Game.SelectMission(MissionIdentifier) end
 ---@param RotationSpeed number The rotation speed to use.
 function Game.SetActorRotationSpeed(TypeName, RotationSpeed) end
 
--- TODO: SetAllowSeatSlide (Min: 1, Max: 1)
+---Sets if the player is allowed to slide from the passenger seat into the driver's seat when entering a car.
+---
+---@param IsAllowed 0 | 1 Whether seat sliding is allowed.
+function Game.SetAllowSeatSlide(IsAllowed) end
 
 -- TODO: SetAnimCamMulticontName (Min: 1, Max: 1)
 
@@ -626,17 +822,41 @@ function Game.SetActorRotationSpeed(TypeName, RotationSpeed) end
 
 -- TODO: SetBonusMissionStart (Min: 0, Max: 0)
 
--- TODO: SetBrakeScale (Min: 1, Max: 1)
+---Sets the brake scale for a car.
+---
+---@param BrakeScale number The brake scale.
+function Game.SetBrakeScale(BrakeScale) end
 
--- TODO: SetBurnoutRange (Min: 1, Max: 1)
+---Sets the burnout range for a car.
+---
+---@param BurnoutRange  number The burnout range.
+function Game.SetBurnoutRange(BurnoutRange) end
 
--- TODO: SetCMOffsetX (Min: 1, Max: 1)
+---Sets a center-of-mass offset on the X axis for a car.
+---
+---@param Offset number The offset.
+function Game.SetCMOffsetX(Offset) end
 
--- TODO: SetCMOffsetY (Min: 1, Max: 1)
+---Sets a center-of-mass offset on the Y axis for a car.
+---
+---@param Offset number The offset.
+function Game.SetCMOffsetY(Offset) end
 
--- TODO: SetCMOffsetZ (Min: 1, Max: 1)
+---Sets a center-of-mass offset on the Z axis for a car.
+---
+---@param Offset number The offset.
+function Game.SetCMOffsetZ(Offset) end
 
--- TODO: SetCamBestSide (Min: 1, Max: 2)
+---Sets the best side for the camera to be on using a locator in a stage with a "dialogue" objective.
+---
+---@param LocatorName string The name of a locator.
+function Game.SetCamBestSide(LocatorName) end
+
+---Sets the best side for the camera to be on using a locator for the specified bonus mission NPC.
+---
+---@param LocatorName string The name of a locator.
+---@param BonusMissionName string The name of a bonus mission.
+function Game.SetCamBestSide(LocatorName, BonusMissionName) end
 
 ---Sets the phone booth attributes for a car.
 ---
@@ -647,21 +867,41 @@ function Game.SetActorRotationSpeed(TypeName, RotationSpeed) end
 ---@param Handling number The handling of the car.
 function Game.SetCarAttributes(CarName, TopSpeed, Acceleration, Toughness, Handling) end
 
--- TODO: SetCarStartCamera (Min: 1, Max: 1)
+---Does nothing.
+---
+---@param UnusedArgument1 any
+function Game.SetCarStartCamera(UnusedArgument1) end
 
 -- TODO: SetCharacterPosition (Min: 3, Max: 3)
 
--- TODO: SetCharacterScale (Min: 1, Max: 1)
+---Sets the scale of characters in a car.
+---
+---@param CharacterScale number The scale.
+function Game.SetCharacterScale(CharacterScale) end
 
--- TODO: SetCharacterToHide (Min: 1, Max: 1)
+---Removes a character from the world at the start of a stage.
+---
+---Typically used to hide the player character during an end-of-level FMV.
+---
+---@param CharacterName string The name of a character.
+function Game.SetCharacterToHide(CharacterName) end
 
--- TODO: SetCharactersVisible (Min: 1, Max: 1)
+---Sets if characters should be visible in a car.
+---
+---@param AreVisible 0 | 1 Whether the characters are visible.
+function Game.SetCharactersVisible(AreVisible) end
 
 -- TODO: SetChaseSpawnRate (Min: 2, Max: 2)
 
--- TODO: SetCoinDrawable (Min: 1, Max: 1)
+---Sets the drawable name used for coins.
+---
+---@param DrawableName string The name of a drawable.
+function Game.SetCoinDrawable(DrawableName) end
 
--- TODO: SetCoinFee (Min: 1, Max: 1)
+---Sets the coin fee for a "coin" objective.
+---
+---@param CoinFee integer
+function Game.SetCoinFee(CoinFee) end
 
 ---Sets the effect drawable when picking up collectibles in "goto" objectives and other objectives with collectibles.
 ---
@@ -963,11 +1203,11 @@ function Game.SetStageTime(TimeSeconds) end
 ---
 ---For "talkto" objectives, this sets the NPC to talk to.
 ---
----@param NPCName string The name of the NPC to talk to.
+---@param CharacterName string The name of the NPC to talk to.
 ---@param IconType integer The icon drawable to use. 0 = exclamation, 1 = gift, 2 = interior_icon. Note that 1 and 2 do not exist by default in the base game.
 ---@param IconYOffset number | nil The Y offset of the icon. Defaults to 0.
 ---@param TriggerRadius number | nil The trigger radius. Defaults to 1.3.
-function Game.SetTalkToTarget(NPCName, IconType, IconYOffset, TriggerRadius) end
+function Game.SetTalkToTarget(CharacterName, IconType, IconYOffset, TriggerRadius) end
 
 -- TODO: SetTireGrip (Min: 1, Max: 1)
 
