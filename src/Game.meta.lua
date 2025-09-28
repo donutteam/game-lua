@@ -1290,9 +1290,11 @@ function Game.UsePedGroup(PedGroupIndex) end
 -- Special Conditional Functions
 --
 
--- TODO: EndIf
+---Outputs a closing } to end a conditional block
+function Game.EndIf() end
 
--- TODO: Not
+---Outputs a ! to negate a conditional command.
+function Game.Not() end
 
 --
 -- Additional Script Functionality
