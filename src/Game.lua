@@ -616,7 +616,9 @@ local ASFCommands = {
 	{ Name = "SetStageDynaLoadData", MinArgs = 1, MaxArgs = 2, RequiresScope = "Stage" },
 	{ Name = "SetStageEnabledCheats", MinArgs = 1, MaxArgs = 15, RequiresScope = "Stage" },
 	{ Name = "SetStageKickForce", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
+	{ Name = "SetStagePedGroup", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
 	{ Name = "SetStageSlamForce", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
+	{ Name = "SetStageTrafficGroup", MinArgs = 1, MaxArgs = 1, RequiresScope = "Stage" },
 }
 
 local DebugTestCommands = {
