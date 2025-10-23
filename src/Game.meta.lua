@@ -1249,6 +1249,8 @@ function Game.ShowStageComplete() end
 
 ---Starts a music event at the start of the stage.
 ---
+---This command can only trigger a subset of music events. Consider using AdditionalScriptFunctionality and Game.SetStageMusicEvent instead.
+---
 ---@param EventName string The name of the music event to start.
 function Game.StageStartMusicEvent(EventName) end
 
@@ -1460,7 +1462,14 @@ function Game.SetStageDynaLoadData(DynaLoadData, InteriorName) end
 
 -- TODO: SetStageKickForce (Min: 1, Max: 1)
 
--- TODO: SetStageSlamForce (Min: 1, Max: 1)
+---Sets a music event to trigger at the start of the stage.
+---
+---Unlike StageStartMusicEvent, this can trigger any music event in the currently loaded RMS file.
+---
+---Requires the AdditionalScriptFunctionality hack to be used.
+---
+---@param MusicEvent string The name of a music event.
+function Game.SetStageMusicEvent(MusicEvent) end
 
 -- TODO: SetStageNumChaseCars (Min: 1, Max, 1)
 
@@ -1470,6 +1479,8 @@ function Game.SetStageDynaLoadData(DynaLoadData, InteriorName) end
 ---
 ---@param PedGroupIndex integer
 function Game.SetStagePedGroup(PedGroupIndex) end
+
+-- TODO: SetStageSlamForce (Min: 1, Max: 1)
 
 ---Changes the active traffic group upon reaching the stage.
 ---
