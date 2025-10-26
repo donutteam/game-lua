@@ -14,6 +14,7 @@ local string_gsub = string.gsub
 local string_unpack = string.unpack
 
 local table_concat = table.concat
+local table_unpack = table.unpack
 
 local utf8_char = utf8.char
 
@@ -69,8 +70,11 @@ if IsHackLoaded("CustomLimits") and Exists(GetModPath() .. "/CustomLimits.ini", 
 			if fmt then
 				local out = {}
 				local outN = 0
-				local i = 3
 				
+				local chunk = {}
+				local chunkN = 0
+				
+				local i = 3
 				local codepoint
 				while i <= contentN do
 					codepoint, i = string_unpack(fmt, content, i)
@@ -84,10 +88,29 @@ if IsHackLoaded("CustomLimits") and Exists(GetModPath() .. "/CustomLimits.ini", 
 						end
 					end
 					
-					outN = outN + 1
-					out[outN] = utf8_char(codepoint)
+					chunkN = chunkN + 1
+					chunk[chunkN] = codepoint
+					
+					if chunkN >= 1024 then
+						outN = outN + 1
+						out[outN] = utf8_char(table_unpack(chunk))
+						
+						for j=1,chunkN do
+							chunk[j] = nil
+						end
+						chunkN = 0
+					end
 				end
-
+				
+				if chunkN > 0 then
+					outN = outN + 1
+					out[outN] = utf8_char(table_unpack(chunk))
+				end
+				
+				if outN == 1 then
+					return out[1]
+				end
+				
 				return table_concat(out)
 			end
 		end
