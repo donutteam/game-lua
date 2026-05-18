@@ -5,7 +5,7 @@ A library for mods for The Simpsons: Hit &amp; Run that enable developers to eas
 `Game.lua` is the main script that loads all the commands into the `Game` table.
 ### Usage
 * Copy `Game.lua` to your mod's Resources folder, and load it in `CustomFiles.lua`.
-  * Example: `dofile(GetModPath() .. "/Resources/lib/Game.lua)`.
+  * Example: `dofile(GetModPath() .. "/Resources/lib/Game.lua")`.
 * Add a `[PathHandlers]` entry to `CustomFiles.ini` for the required MFK and CON files.
   * Optional: Use the `Redirect.lua` specified below for ease of use.
   * Example: `scripts\\mission\\level01\\m0i.mfk=Resources/scripts/missions/level01/m0i.lua`.
@@ -115,7 +115,7 @@ The script also contains 3 `Command` tables:
 `GameUtils.lua` is an optional script that adds helper utility functions to a `GameUtils` table, for example one function for every objective and condition.
 ### Usage
 * Copy `GameUtils.lua` to your mod's Resources folder, and load it in `CustomFiles.lua` *after `Game.lua`*.
-  * Example: `dofile(GetModPath() .. "/Resources/lib/GameUtils.lua)`.
+  * Example: `dofile(GetModPath() .. "/Resources/lib/GameUtils.lua")`.
 * In a MFK or CON Lua script, you can now use `GameUtils` functions in place of their `Game` functions. For a full list, see the [Functions](#Functions) section below.
 
 ### Functions
